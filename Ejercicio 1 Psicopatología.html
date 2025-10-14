@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casos Clínicos - Psicopatología</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #34495e;
+            --success: #2ecc71;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--dark));
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        h2 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--secondary);
+        }
+        
+        h3 {
+            color: var(--dark);
+            margin: 20px 0 10px;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .instructions {
+            background-color: var(--light);
+            border-left: 5px solid var(--secondary);
+        }
+        
+        .case-card {
+            border-left: 5px solid var(--accent);
+        }
+        
+        .case-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        
+        button {
+            background-color: var(--secondary);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: var(--primary);
+        }
+        
+        button:disabled {
+            background-color: #bdc3c7;
+            cursor: not-allowed;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background-color: #e0e0e0;
+            border-radius: 4px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            background-color: var(--success);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        
+        .case-counter {
+            text-align: center;
+            color: var(--dark);
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .specialty-badge {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .criminology-badge {
+            background-color: #e74c3c;
+            color: white;
+        }
+        
+        .psychology-badge {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        .case-content {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-style: italic;
+            border-left: 3px solid #ddd;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Casos Clínicos - Psicopatología</h1>
+            <p>Análisis de casos complejos para estudiantes de Psicología y Criminología</p>
+        </div>
+    </header>
+    
+    <div class="container">
+        <!-- Pantalla de instrucciones -->
+        <div id="instructions-screen">
+            <div class="card instructions">
+                <h2>Instrucciones para el Análisis de Casos</h2>
+                
+                <h3>Para Estudiantes de Psicología:</h3>
+                <p>Al analizar cada caso clínico, deberás:</p>
+                <ul style="margin-left: 20px; margin-bottom: 15px;">
+                    <li>Identificar los 3 trastornos que mejor expliquen la condición del paciente</li>
+                    <li>Ordenarlos jerárquicamente según su relevancia diagnóstica</li>
+                    <li>Para cada trastorno, justificar tu elección señalando qué criterios diagnósticos cumple según el DSM-5-TR</li>
+                    <li>Considerar posibles diagnósticos diferenciales y comorbilidades</li>
+                </ul>
+                
+                <h3>Para Estudiantes de Criminología:</h3>
+                <p>Al analizar cada caso, deberás:</p>
+                <ul style="margin-left: 20px; margin-bottom: 15px;">
+                    <li>Identificar los 3 trastornos que puedan estar relacionados con la conducta delictiva o antisocial</li>
+                    <li>Ordenarlos jerárquicamente según su influencia en el comportamiento</li>
+                    <li>Para cada trastorno, justificar tu elección señalando qué criterios diagnósticos cumple según el DSM-5-TR</li>
+                    <li>Analizar la posible relación entre la psicopatología y la conducta delictiva</li>
+                </ul>
+                
+                <p><strong>Nota:</strong> Los casos están diseñados para ser complejos y requerir un análisis cuidadoso de los criterios diagnósticos.</p>
+                
+                <div style="text-align: center; margin-top: 25px;">
+                    <button id="start-button">Comenzar con Casos de Criminología</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Pantalla de casos -->
+        <div id="cases-screen" class="hidden">
+            <div class="case-counter">
+                Caso <span id="current-case">1</span> de <span id="total-cases">6</span>
+            </div>
+            
+            <div class="progress-bar">
+                <div class="progress" id="progress-bar"></div>
+            </div>
+            
+            <div class="card case-card">
+                <span id="specialty-badge" class="specialty-badge criminology-badge">Criminología</span>
+                <h2 id="case-title">Caso Criminología 1</h2>
+                
+                <div class="case-content">
+                    <p id="case-text">Cargando caso...</p>
+                </div>
+                
+                <div class="case-navigation">
+                    <button id="prev-button" disabled>Anterior</button>
+                    <button id="next-button">Siguiente</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <p>Material para uso educativo - Psicopatología - Basado en criterios DSM-5-TR</p>
+        </div>
+    </footer>
+
+    <script>
+        // Datos de los casos clínicos adaptados al contexto mexicano
+        const cases = [
+            {
+                specialty: "Criminología",
+                title: "Caso 1 - Comportamiento impulsivo y agresivo",
+                text: "El trabajador social del Centro de Internamiento Especializado para Adolescentes en Guadalajara describe a Carlos, de 16 años: 'Su historial es de impulsividad desde pequeño: lo expulsaron de tres secundarias por pleitos y por responder agresivamente a los maestros. Los reportes escolares ya mencionaban su incapacidad para permanecer sentado y su tendencia a actuar sin pensar. Ahora está con nosotros por robo a una tienda de conveniencia, un acto que según él fue 'sin pensar, se me ocurrió en el momento'. No muestra remordimiento, pero tampoco planea sus actos. Parece vivir al día, sin considerar las consecuencias. Su familia reporta que de pequeño era imposible dejarlo solo en casa, porque entraba en pánico, pero eso ha ido desapareciendo con los años.'"
+            },
+            {
+                specialty: "Criminología",
+                title: "Caso 2 - Estafas telefónicas y dificultades sociales",
+                text: "'Sé que lo que hice estuvo mal, lo de las estafas por teléfono donde me hacía pasar por empleado del banco. Pero es que las reglas nunca han sido lo mío. La gente dice una cosa y quiere decir otra, y yo me lo tomo literal y luego soy yo el que queda como tonto. Mis compañeros en el call center de la Ciudad de México se reían de mí porque no captaba sus indirectas ni sus albures. Yo solo quería demostrar que podía ser tan listo como ellos. Cuando diseñé el esquema de la estafa, me obsesioné con los detalles técnicos, era un sistema perfecto. Nunca pensé en cómo se sentirían las víctimas, muchos eran adultos mayores, eso es algo que, honestamente, no se me cruzó por la cabeza. Para mí era un rompecabezas, no un delito contra personas.'"
+            },
+            {
+                specialty: "Criminología",
+                title: "Caso 3 - Robo en tiendas y ansiedad",
+                text: "La hermana de Fernanda, una mujer de 24 años actualmente en libertad condicional por robo en tiendas departamentales, relata: 'Fernanda siempre ha sido muy nerviosa. De niña, si nuestra mamá se perdía de vista en el mercado o en el Walmart, entraba en pánico. Ahora de adulta, tiene que llevar siempre su celular con la ubicación compartida conmigo. Los robos siempre ocurren los días en que yo tengo que viajar por trabajo a Monterrey. Ella lo niega, pero yo estoy segura. Cuando la detuvieron en el Liverpool, dijo que sintió que no podía respirar en el centro comercial y que agarrar esas cosas sin pagar fue un acto sin pensar, para calmar los nervios. En casa, todavía a veces se orina en la cama cuando está bajo mucho estrés, como la semana antes de uno de mis viajes.'"
+            },
+            {
+                specialty: "Psicología",
+                title: "Caso 4 - Dificultades de atención y apego",
+                text: "'Siempre he sido un desastre para organizarme. En la oficina en Puebla donde trabajo, empiezo mil cosas a la vez y no termino ninguna, me distraigo con el más mínimo ruido y ya he recibido un par de llamadas de atención por mis errores por descuido. Pero lo que de verdad me angustia es la sensación constante de pánico cuando mi esposa se va de casa, aunque sea a la tienda de la esquina. Me quedo paralizado, reviso el WhatsApp cada minuto, y no logro concentrarme en nada hasta que no regresa. Esto empezó de pequeño, recuerdo que a los diez años ya era una pesadilla cuando mis papás se iban, pero ahora de adulto es insoportable y está arruinando mi relación y mi trabajo.'"
+            },
+            {
+                specialty: "Psicología",
+                title: "Caso 5 - Dificultades sociales en un niño",
+                text: "La mamá de Diego, un niño de 8 años de Mérida, comenta con preocupación: 'En la primaria nos dicen que es muy inteligente, pero que no socializa. Se pasa el recreo solo, caminando de un lado a otro. Cuando otros niños se le acercan, él les habla solo de dinosaurios, con un lenguaje tan técnico que nadie le entiende. En casa, si cambiamos la ruta del carro de la escuela a casa, hace un berrinche tremendo que puede durar media hora. No es que no hable, habla muchísimo, pero parece que no sabe cómo jugar con los demás. Hemos notado que a veces no responde cuando lo llaman por su nombre, como si no oyera, pero el pediatra del IMSS dice que su audición es perfecta.'"
+            },
+            {
+                specialty: "Psicología",
+                title: "Caso 6 - Dificultades del lenguaje y ansiedad",
+                text: "'Desde que tengo memoria, las palabras han sido mi enemigo. Mis ideas son claras en mi cabeza, pero al hablar, los sonidos salen revueltos y la gente me mira con cara de no entender nada. En la prepa en León me evitaban porque era 'el raro' que no se expresaba bien. Ahora, con 22 años, evito cualquier situación donde tenga que hablar en público o mantener una plática casual. Me da tanto miedo quedar en ridículo que prefiero quedarme callado, lo que hace que parezco grosero o antipático. Esto no es pena, es una frustración constante porque sé lo que quiero decir, pero mi boca no me obedece.'"
+            }
+        ];
+
+        // Elementos DOM
+        const instructionsScreen = document.getElementById('instructions-screen');
+        const casesScreen = document.getElementById('cases-screen');
+        const startButton = document.getElementById('start-button');
+        const prevButton = document.getElementById('prev-button');
+        const nextButton = document.getElementById('next-button');
+        const currentCaseElement = document.getElementById('current-case');
+        const totalCasesElement = document.getElementById('total-cases');
+        const progressBar = document.getElementById('progress-bar');
+        const specialtyBadge = document.getElementById('specialty-badge');
+        const caseTitle = document.getElementById('case-title');
+        const caseText = document.getElementById('case-text');
+        
+        // Variables de estado
+        let currentCaseIndex = 0;
+        totalCasesElement.textContent = cases.length;
+        
+        // Actualizar la barra de progreso
+        function updateProgressBar() {
+            const progress = ((currentCaseIndex + 1) / cases.length) * 100;
+            progressBar.style.width = `${progress}%`;
+        }
+        
+        // Mostrar caso actual
+        function showCurrentCase() {
+            const currentCase = cases[currentCaseIndex];
+            
+            // Actualizar elementos de la interfaz
+            currentCaseElement.textContent = currentCaseIndex + 1;
+            caseTitle.textContent = currentCase.title;
+            caseText.textContent = currentCase.text;
+            
+            // Actualizar badge de especialidad
+            specialtyBadge.textContent = currentCase.specialty;
+            specialtyBadge.className = 'specialty-badge ' + 
+                (currentCase.specialty === 'Criminología' ? 'criminology-badge' : 'psychology-badge');
+            
+            // Actualizar estado de los botones
+            prevButton.disabled = currentCaseIndex === 0;
+            nextButton.textContent = currentCaseIndex === cases.length - 1 ? 'Finalizar' : 'Siguiente';
+            
+            // Actualizar barra de progreso
+            updateProgressBar();
+        }
+        
+        // Event Listeners
+        startButton.addEventListener('click', () => {
+            instructionsScreen.classList.add('hidden');
+            casesScreen.classList.remove('hidden');
+            showCurrentCase();
+        });
+        
+        prevButton.addEventListener('click', () => {
+            if (currentCaseIndex > 0) {
+                currentCaseIndex--;
+                showCurrentCase();
+            }
+        });
+        
+        nextButton.addEventListener('click', () => {
+            if (currentCaseIndex < cases.length - 1) {
+                currentCaseIndex++;
+                showCurrentCase();
+            } else {
+                // Al finalizar, mostrar mensaje de finalización
+                alert('¡Has completado todos los casos! Revisa tus análisis con tu profesor.');
+            }
+        });
+        
+        // Inicializar
+        updateProgressBar();
+    </script>
+</body>
+</html>
