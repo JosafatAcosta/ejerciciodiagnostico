@@ -766,12 +766,74 @@
     font-style: italic;
   }
 
+  /* Citations */
+  .cite {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72em;
+    color: var(--rust);
+    vertical-align: super;
+    line-height: 0;
+    font-style: normal;
+    cursor: default;
+    white-space: nowrap;
+  }
+
+  /* References section */
+  .references-section {
+    background: var(--ink);
+    color: var(--parchment);
+    padding: 2.5rem 2rem 2rem;
+    border-top: 3px solid var(--gold);
+  }
+
+  .references-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .references-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: var(--accent);
+    margin-bottom: 0.3rem;
+    letter-spacing: 0.02em;
+  }
+
+  .references-subtitle {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0.45;
+    margin-bottom: 1.5rem;
+  }
+
+  .ref-list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+    gap: 0.75rem 2rem;
+  }
+
+  .ref-item {
+    font-size: 0.78rem;
+    line-height: 1.6;
+    color: rgba(245,240,232,0.7);
+    font-weight: 300;
+    padding-left: 1.5rem;
+    text-indent: -1.5rem;
+    font-family: 'Fraunces', Georgia, serif;
+  }
+
+  .ref-item em { font-style: italic; }
+
   /* Responsive */
   @media (max-width: 680px) {
     .activities-grid { grid-template-columns: 1fr; }
     .diag-grid { grid-template-columns: 1fr; }
     .section-header { flex-direction: column; gap: 0.5rem; }
     .section-number { font-size: 2.5rem; }
+    .ref-list { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -900,7 +962,7 @@
 
     <div class="callout">
       <div class="callout-icon">💡</div>
-      <p>Este módulo está diseñado bajo el enfoque de <strong>aprendizaje basado en problemas</strong> para psicólogos en formación y clínicos que buscan profundizar en razonamiento diagnóstico. Cada actividad combina teoría, práctica reflexiva y autoevaluación. Las actividades interactivas permiten registrar notas, cronometrar ejercicios y hacer seguimiento del aprendizaje.</p>
+      <p>Este módulo está diseñado bajo el enfoque de <strong>aprendizaje basado en problemas</strong> para psicólogos en formación y clínicos que buscan profundizar en razonamiento diagnóstico <span class="cite">(Barrows, 1996)</span>. Cada actividad combina teoría, práctica reflexiva y autoevaluación. El razonamiento clínico integrado requiere dominar simultáneamente los niveles categorial, funcional y diferencial del diagnóstico <span class="cite">(Eells, 2022)</span>.</p>
     </div>
   </section>
 
@@ -961,7 +1023,7 @@
 
       <div class="callout">
         <div class="callout-icon">📌</div>
-        <p>El diagnóstico categorial ofrece fiabilidad interjueces y facilita la comunicación clínica, pero tiene limitaciones: no captura la heterogeneidad individual, favorece la comorbilidad artificial y puede ignorar el contexto cultural y funcional del paciente.</p>
+        <p>El diagnóstico categorial ofrece fiabilidad interjueces y facilita la comunicación clínica <span class="cite">(American Psychiatric Association [APA], 2022)</span>, pero tiene limitaciones: no captura la heterogeneidad individual, favorece la comorbilidad artificial y puede ignorar el contexto cultural y funcional del paciente <span class="cite">(Hyman, 2010; Kinderman et al., 2013)</span>. La Organización Mundial de la Salud reconoce estas limitaciones en el diseño de la CIE-11 <span class="cite">(OMS, 2019)</span>.</p>
       </div>
     </div>
 
@@ -1125,6 +1187,7 @@
     </div>
 
     <div class="sub-panel active" id="func-teoria">
+      <p style="font-size:0.88rem; color:var(--slate); font-weight:300; line-height:1.7; margin-bottom:1.2rem;">El análisis funcional de la conducta constituye el núcleo metodológico del diagnóstico funcional. Identifica las variables antecedentes y consecuentes que controlan y mantienen las conductas problema, permitiendo diseñar intervenciones individualizadas <span class="cite">(Haynes & O'Brien, 2000)</span>. A diferencia del diagnóstico categorial, es idiográfico: describe el caso único en su contexto <span class="cite">(Virués-Ortega & Haynes, 2005)</span>.</p>
       <table class="matrix">
         <thead>
           <tr>
@@ -1200,7 +1263,7 @@
           <div class="step-num">1</div>
           <div class="step-content">
             <strong>Hipótesis funcional</strong>
-            <p>Redacta la hipótesis en formato: "La conducta [X] está controlada por [antecedentes] y se mantiene por [consecuencias], cuya función es [evitar/obtener]..."</p>
+            <p>Redacta la hipótesis en formato: "La conducta [X] está controlada por [antecedentes] y se mantiene por [consecuencias], cuya función es [evitar/obtener]..." <span class="cite">(Haynes & O'Brien, 2000)</span>. Recuerda que el reforzamiento negativo —eliminación de un estímulo aversivo— es el mecanismo más frecuente en conductas de evitación <span class="cite">(Skinner, 1953; Cooper et al., 2020)</span>.</p>
           </div>
         </li>
         <li class="step">
@@ -1232,7 +1295,7 @@
         <div class="timer-label">Tiempo sugerido: 45 min</div>
       </div>
 
-      <p style="font-size:0.9rem; color:var(--slate); margin-bottom:1rem; font-weight:300; line-height:1.6;">Usando el caso R.L., desarrolla una formulación clínica completa según el modelo de las 4 P (Predisponentes, Precipitantes, Perpetuantes, Protectores).</p>
+      <p style="font-size:0.9rem; color:var(--slate); margin-bottom:1rem; font-weight:300; line-height:1.6;">Usando el caso R.L., desarrolla una formulación clínica completa según el modelo de las 4 P (Predisponentes, Precipitantes, Perpetuantes, Protectores) <span class="cite">(Johnstone & Dallos, 2014; Macneil et al., 2012)</span>. Este modelo integra la perspectiva biopsicosocial y longitudinal, orientando el tratamiento hacia los factores modificables <span class="cite">(Engel, 1977)</span>.</p>
 
       <div class="diag-grid" style="grid-template-columns: 1fr 1fr;">
         <div class="diag-cell">
@@ -1275,6 +1338,7 @@
 
     <div class="sub-panel active" id="diff-actividad1">
       <h3 style="font-family:'Playfair Display',serif; margin-bottom:1rem;">Actividad 1 · Debate Clínico: ¿Depresión o Duelo?</h3>
+      <p style="font-size:0.88rem; color:var(--slate); font-weight:300; line-height:1.7; margin-bottom:1.2rem;">El DSM-5-TR eliminó la exclusión por duelo del Episodio Depresivo Mayor, reconociendo que ambos pueden coexistir <span class="cite">(APA, 2022)</span>. Por su parte, la CIE-11 introdujo el Trastorno de Duelo Prolongado (6B42) como categoría independiente, validada transculturalmente <span class="cite">(Prigerson et al., 2021; OMS, 2019)</span>. La siguiente tabla sistematiza los elementos discriminadores.</p>
 
       <div class="case-box">
         <div class="case-box-label">Viñeta Clínica — Caso "M.T."</div>
@@ -1354,7 +1418,7 @@
     <div class="sub-panel" id="diff-actividad2">
       <h3 style="font-family:'Playfair Display',serif; margin-bottom:1rem;">Actividad 2 · Espectro Ansioso-Depresivo: Toma de decisión clínica</h3>
 
-      <p style="font-size:0.9rem; color:var(--slate); margin-bottom:1.5rem; font-weight:300; line-height:1.6;">Trabaja el razonamiento diferencial para los cuadros más frecuentes en comorbilidad ansiosa-depresiva. Marca cada criterio que revisarías para discriminar.</p>
+      <p style="font-size:0.9rem; color:var(--slate); margin-bottom:1.5rem; font-weight:300; line-height:1.6;">La comorbilidad entre trastornos de ansiedad y del estado de ánimo supera el 50% en muestras clínicas <span class="cite">(Kessler et al., 2005)</span>. Determinar la primacía diagnóstica es fundamental para orientar el tratamiento, ya que el orden de aparición predice el pronóstico y la respuesta terapéutica <span class="cite">(Brown & Barlow, 2009)</span>. Trabaja el razonamiento diferencial marcando cada criterio que revisarías.</p>
 
       <ul class="checklist">
         <li class="check-item" onclick="toggleCheck(this)">
@@ -1399,7 +1463,7 @@
 
       <div class="callout">
         <div class="callout-icon">⚠️</div>
-        <p>Este es uno de los diagnósticos diferenciales de mayor complejidad y consecuencias clínicas. Un error puede llevar a tratamientos radicalmente distintos (antipsicóticos vs psicoterapia trauma-focada). La sistemática es esencial.</p>
+        <p>Este es uno de los diagnósticos diferenciales de mayor complejidad y consecuencias clínicas. Un error puede llevar a tratamientos radicalmente distintos: antipsicóticos frente a psicoterapia focalizada en el trauma <span class="cite">(Morrison et al., 2003; Van der Hart et al., 2006)</span>. Los síntomas disociativos son frecuentemente confundidos con síntomas psicóticos de primer rango, lo que incrementa el riesgo de diagnóstico erróneo <span class="cite">(Ross & Keyes, 2004)</span>. La sistemática es esencial.</p>
       </div>
 
       <ol class="steps">
@@ -1407,28 +1471,28 @@
           <div class="step-num">1</div>
           <div class="step-content">
             <strong>Primer nodo: ¿Hay ruptura con la realidad?</strong>
-            <p>Distingue entre: (a) delirio genuino — convicción irrefutable no culturalmente normada; (b) creencias sobrevaluadas; (c) flashbacks traumáticos — el paciente sabe que es pasado aunque lo "reviva"; (d) estados disociativos — confusión de identidad sin pérdida de realidad externa.</p>
+            <p>Distingue entre: (a) delirio genuino — convicción irrefutable no culturalmente normada <span class="cite">(APA, 2022)</span>; (b) creencias sobrevaluadas; (c) flashbacks traumáticos — el paciente sabe que es pasado aunque lo "reviva" <span class="cite">(Herman, 1992)</span>; (d) estados disociativos — confusión de identidad sin pérdida de realidad externa <span class="cite">(Dell & O'Neil, 2009)</span>.</p>
           </div>
         </li>
         <li class="step">
           <div class="step-num">2</div>
           <div class="step-content">
             <strong>Segundo nodo: ¿Cuál es el contexto de aparición?</strong>
-            <p>La psicosis de inicio agudo suele aparecer sin trauma previo identificable. Los síntomas pseudopsicóticos en TEPT aparecen vinculados a desencadenantes, son más breves y el paciente generalmente mantiene insight parcial.</p>
+            <p>La psicosis de inicio agudo suele aparecer sin trauma previo identificable. Los síntomas pseudopsicóticos en TEPT aparecen vinculados a desencadenantes, son más breves y el paciente generalmente mantiene insight parcial <span class="cite">(Morrison et al., 2003)</span>.</p>
           </div>
         </li>
         <li class="step">
           <div class="step-num">3</div>
           <div class="step-content">
             <strong>Tercer nodo: Evaluar disociación con escala estructurada</strong>
-            <p>Aplica DES-II (Dissociative Experiences Scale) o MID. Una puntuación elevada en un paciente "psicótico" debe alertar de TID u otro trastorno disociativo. Distingue despersonalización de síntomas negativos esquizofrénicos.</p>
+            <p>Aplica DES-II (Dissociative Experiences Scale) o MID. Una puntuación elevada en un paciente "psicótico" debe alertar de TID u otro trastorno disociativo <span class="cite">(Bernstein & Putnam, 1986; Dell, 2006)</span>. Distingue despersonalización de síntomas negativos esquizofrénicos.</p>
           </div>
         </li>
         <li class="step">
           <div class="step-num">4</div>
           <div class="step-content">
             <strong>Cuarto nodo: Historia longitudinal</strong>
-            <p>La esquizofrenia tiene curso crónico con deterioro progresivo. El TEPT-C puede tener oscilaciones. Los trastornos disociativos complejos tienen historia de trauma severo y temprano. Construye una línea temporal con el paciente.</p>
+            <p>La esquizofrenia tiene curso crónico con deterioro progresivo <span class="cite">(APA, 2022)</span>. El TEPT-C puede tener oscilaciones. Los trastornos disociativos complejos tienen historia de trauma severo y temprano <span class="cite">(Van der Hart et al., 2006)</span>. Construye una línea temporal con el paciente.</p>
           </div>
         </li>
         <li class="step">
@@ -1471,14 +1535,14 @@
         <div class="step-num">2</div>
         <div class="step-content">
           <strong>Nivel Funcional — Análisis de las autolesiones</strong>
-          <p>Aplica el modelo ABC específicamente a las conductas de autolesión. ¿Cuál es su función (regulación emocional, comunicación, autopunición)? ¿Cómo difiere esto del diagnóstico categorial?</p>
+          <p>Aplica el modelo ABC específicamente a las conductas de autolesión. ¿Cuál es su función (regulación emocional, comunicación, autopunición)? <span class="cite">(Nock, 2009)</span>. ¿Cómo difiere esto del diagnóstico categorial? Las autolesiones no suicidas tienen función primordialmente de regulación afectiva en contextos de alta reactividad emocional <span class="cite">(Linehan, 1993)</span>.</p>
         </div>
       </li>
       <li class="step">
         <div class="step-num">3</div>
         <div class="step-content">
           <strong>Nivel Diferencial — TLP vs Bipolar II vs TEPT-C</strong>
-          <p>Este es el diferencial más frecuente y más debatido. Usa la tabla de la Actividad 1 de Diferencial como modelo. ¿Qué datos del caso apuntan a cada diagnóstico? ¿Hay solapamiento real (comorbilidad) o es todo una misma condición?</p>
+          <p>Este es el diferencial más frecuente y más debatido <span class="cite">(Paris, 2013)</span>. Usa la tabla de la Actividad 1 de Diferencial como modelo. ¿Qué datos del caso apuntan a cada diagnóstico? El solapamiento sintomático entre estos cuadros es real y documentado: la labilidad emocional del TLP difiere cualitativamente de los ciclos del TB-II en duración y desencadenantes <span class="cite">(Gunderson et al., 2006)</span>.</p>
         </div>
       </li>
       <li class="step">
@@ -1687,6 +1751,42 @@ function nextCard(dir) {
 
 updateCard();
 </script>
+
+<section class="references-section">
+  <div class="references-inner">
+    <div class="references-title">Referencias</div>
+    <div class="references-subtitle">Formato APA 7.ª edición</div>
+    <ul class="ref-list">
+      <li class="ref-item">American Psychiatric Association. (2022). <em>Diagnostic and statistical manual of mental disorders</em> (5.ª ed., texto rev.; DSM-5-TR). American Psychiatric Publishing. <a href="https://doi.org/10.1176/appi.books.9780890425787" style="color:var(--accent); font-size:0.75em;">https://doi.org/10.1176/appi.books.9780890425787</a></li>
+      <li class="ref-item">Barrows, H. S. (1996). Problem-based learning in medicine and beyond: A brief overview. <em>New Directions for Teaching and Learning, 1996</em>(68), 3–12. <a href="https://doi.org/10.1002/tl.37219966804" style="color:var(--accent); font-size:0.75em;">https://doi.org/10.1002/tl.37219966804</a></li>
+      <li class="ref-item">Bernstein, E. M., & Putnam, F. W. (1986). Development, reliability, and validity of a dissociation scale. <em>Journal of Nervous and Mental Disease, 174</em>(12), 727–735. <a href="https://doi.org/10.1097/00005053-198612000-00004" style="color:var(--accent); font-size:0.75em;">https://doi.org/10.1097/00005053-198612000-00004</a></li>
+      <li class="ref-item">Brown, T. A., & Barlow, D. H. (2009). A proposal for a dimensional classification system based on the shared features of the DSM-IV anxiety and mood disorders. <em>Psychological Assessment, 21</em>(3), 256–271. <a href="https://doi.org/10.1037/a0016608" style="color:var(--accent); font-size:0.75em;">https://doi.org/10.1037/a0016608</a></li>
+      <li class="ref-item">Cooper, J. O., Heron, T. E., & Heward, W. L. (2020). <em>Applied behavior analysis</em> (3.ª ed.). Pearson.</li>
+      <li class="ref-item">Dell, P. F. (2006). The Multidimensional Inventory of Dissociation (MID): A comprehensive measure of pathological dissociation. <em>Journal of Trauma & Dissociation, 7</em>(2), 77–106. <a href="https://doi.org/10.1300/J229v07n02_06" style="color:var(--accent); font-size:0.75em;">https://doi.org/10.1300/J229v07n02_06</a></li>
+      <li class="ref-item">Dell, P. F., & O'Neil, J. A. (Eds.). (2009). <em>Dissociation and the dissociative disorders: DSM-V and beyond</em>. Routledge.</li>
+      <li class="ref-item">Eells, T. D. (Ed.). (2022). <em>Handbook of psychotherapy case formulation</em> (3.ª ed.). Guilford Press.</li>
+      <li class="ref-item">Engel, G. L. (1977). The need for a new medical model: A challenge for biomedicine. <em>Science, 196</em>(4286), 129–136. <a href="https://doi.org/10.1126/science.847460" style="color:var(--accent); font-size:0.75em;">https://doi.org/10.1126/science.847460</a></li>
+      <li class="ref-item">Gunderson, J. G., Weinberg, I., Daversa, M. T., Kueppenbender, K. D., Zanarini, M. C., Shea, M. T., Skodol, A. E., Sanislow, C. A., Yen, S., Morey, L. C., Grilo, C. M., McGlashan, T. H., Stout, R. L., & Dyck, I. (2006). Descriptive and longitudinal observations on the relationship of borderline personality disorder and bipolar disorder. <em>American Journal of Psychiatry, 163</em>(7), 1173–1178. <a href="https://doi.org/10.1176/ajp.2006.163.7.1173" style="color:var(--accent); font-size:0.75em;">https://doi.org/10.1176/ajp.2006.163.7.1173</a></li>
+      <li class="ref-item">Haynes, S. N., & O'Brien, W. H. (2000). <em>Principles and practice of behavioral assessment</em>. Kluwer Academic / Plenum.</li>
+      <li class="ref-item">Herman, J. L. (1992). <em>Trauma and recovery</em>. Basic Books.</li>
+      <li class="ref-item">Hyman, S. E. (2010). The diagnosis of mental disorders: The problem of reification. <em>Annual Review of Clinical Psychology, 6</em>, 155–179. <a href="https://doi.org/10.1146/annurev.clinpsy.3.022806.091532" style="color:var(--accent); font-size:0.75em;">https://doi.org/10.1146/annurev.clinpsy.3.022806.091532</a></li>
+      <li class="ref-item">Johnstone, L., & Dallos, R. (Eds.). (2014). <em>Formulation in psychology and psychotherapy: Making sense of people's problems</em> (2.ª ed.). Routledge.</li>
+      <li class="ref-item">Kessler, R. C., Berglund, P., Demler, O., Jin, R., Merikangas, K. R., & Walters, E. E. (2005). Lifetime prevalence and age-of-onset distributions of DSM-IV disorders in the National Comorbidity Survey Replication. <em>Archives of General Psychiatry, 62</em>(6), 593–602. <a href="https://doi.org/10.1001/archpsyc.62.6.593" style="color:var(--accent); font-size:0.75em;">https://doi.org/10.1001/archpsyc.62.6.593</a></li>
+      <li class="ref-item">Kinderman, P., Read, J., Moncrieff, J., & Bentall, R. P. (2013). Drop the language of disorder. <em>Evidence Based Mental Health, 16</em>(1), 2. <a href="https://doi.org/10.1136/eb-2012-100987" style="color:var(--accent); font-size:0.75em;">https://doi.org/10.1136/eb-2012-100987</a></li>
+      <li class="ref-item">Linehan, M. M. (1993). <em>Cognitive-behavioral treatment of borderline personality disorder</em>. Guilford Press.</li>
+      <li class="ref-item">Macneil, C. A., Hasty, M. K., Conus, P., & Berk, M. (2012). Is diagnosis enough to guide interventions in mental health? Using case formulation in clinical practice. <em>BMC Medicine, 10</em>, 111. <a href="https://doi.org/10.1186/1741-7015-10-111" style="color:var(--accent); font-size:0.75em;">https://doi.org/10.1186/1741-7015-10-111</a></li>
+      <li class="ref-item">Morrison, A. P., Frame, L., & Larkin, W. (2003). Relationships between trauma and psychosis: A review and integration. <em>British Journal of Clinical Psychology, 42</em>(4), 331–353. <a href="https://doi.org/10.1348/014466503322528892" style="color:var(--accent); font-size:0.75em;">https://doi.org/10.1348/014466503322528892</a></li>
+      <li class="ref-item">Nock, M. K. (2009). Why do people hurt themselves? New insights into the nature and functions of self-injury. <em>Current Directions in Psychological Science, 18</em>(2), 78–83. <a href="https://doi.org/10.1111/j.1467-8721.2009.01613.x" style="color:var(--accent); font-size:0.75em;">https://doi.org/10.1111/j.1467-8721.2009.01613.x</a></li>
+      <li class="ref-item">Organización Mundial de la Salud. (2019). <em>Clasificación internacional de enfermedades, 11.ª revisión (CIE-11)</em>. OMS. <a href="https://icd.who.int/es" style="color:var(--accent); font-size:0.75em;">https://icd.who.int/es</a></li>
+      <li class="ref-item">Paris, J. (2013). <em>The intelligent clinician's guide to the DSM-5</em>. Oxford University Press.</li>
+      <li class="ref-item">Prigerson, H. G., Boelen, P. A., Xu, J., Smith, K. V., & Maciejewski, P. K. (2021). Validation of the new DSM-5-TR criteria for prolonged grief disorder and the PG-13-Revised (PG-13-R) scale. <em>World Psychiatry, 20</em>(1), 96–106. <a href="https://doi.org/10.1002/wps.20823" style="color:var(--accent); font-size:0.75em;">https://doi.org/10.1002/wps.20823</a></li>
+      <li class="ref-item">Ross, C. A., & Keyes, B. (2004). Dissociation and schizophrenia. <em>Journal of Trauma & Dissociation, 5</em>(3), 69–83. <a href="https://doi.org/10.1300/J229v05n03_04" style="color:var(--accent); font-size:0.75em;">https://doi.org/10.1300/J229v05n03_04</a></li>
+      <li class="ref-item">Skinner, B. F. (1953). <em>Science and human behavior</em>. Macmillan.</li>
+      <li class="ref-item">Van der Hart, O., Nijenhuis, E. R. S., & Steele, K. (2006). <em>The haunted self: Structural dissociation and the treatment of chronic traumatization</em>. W. W. Norton & Company.</li>
+      <li class="ref-item">Virués-Ortega, J., & Haynes, S. N. (2005). Functional analysis in behavior therapy: Behavioral foundations and clinical application. <em>International Journal of Clinical and Health Psychology, 5</em>(3), 567–587.</li>
+    </ul>
+  </div>
+</section>
 
 <footer style="
   background: var(--ink);
