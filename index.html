@@ -1,354 +1,1711 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Casos Clínicos - Psicopatología</title>
-    <style>
-        :root {
-            --primary: #2c3e50;
-            --secondary: #3498db;
-            --accent: #e74c3c;
-            --light: #ecf0f1;
-            --dark: #34495e;
-            --success: #2ecc71;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            background-color: #f5f7fa;
-            color: #333;
-            line-height: 1.6;
-        }
-        
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        
-        header {
-            background: linear-gradient(135deg, var(--primary), var(--dark));
-            color: white;
-            padding: 30px 0;
-            text-align: center;
-            border-radius: 0 0 10px 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            margin-bottom: 30px;
-        }
-        
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-        }
-        
-        h2 {
-            color: var(--primary);
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid var(--secondary);
-        }
-        
-        h3 {
-            color: var(--dark);
-            margin: 20px 0 10px;
-        }
-        
-        .card {
-            background: white;
-            border-radius: 10px;
-            padding: 25px;
-            margin-bottom: 25px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
-        }
-        
-        .card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .instructions {
-            background-color: var(--light);
-            border-left: 5px solid var(--secondary);
-        }
-        
-        .case-card {
-            border-left: 5px solid var(--accent);
-        }
-        
-        .case-navigation {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-        }
-        
-        button {
-            background-color: var(--secondary);
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: background-color 0.3s;
-        }
-        
-        button:hover {
-            background-color: var(--primary);
-        }
-        
-        button:disabled {
-            background-color: #bdc3c7;
-            cursor: not-allowed;
-        }
-        
-        .hidden {
-            display: none;
-        }
-        
-        .progress-bar {
-            height: 8px;
-            background-color: #e0e0e0;
-            border-radius: 4px;
-            margin: 20px 0;
-            overflow: hidden;
-        }
-        
-        .progress {
-            height: 100%;
-            background-color: var(--success);
-            width: 0%;
-            transition: width 0.5s ease;
-        }
-        
-        .case-counter {
-            text-align: center;
-            color: var(--dark);
-            margin-bottom: 10px;
-            font-weight: bold;
-        }
-        
-        .specialty-badge {
-            display: inline-block;
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: bold;
-            margin-bottom: 15px;
-        }
-        
-        .criminology-badge {
-            background-color: #e74c3c;
-            color: white;
-        }
-        
-        .psychology-badge {
-            background-color: #3498db;
-            color: white;
-        }
-        
-        .case-content {
-            background-color: #f9f9f9;
-            padding: 20px;
-            border-radius: 8px;
-            margin: 15px 0;
-            font-style: italic;
-            border-left: 3px solid #ddd;
-        }
-        
-        footer {
-            text-align: center;
-            margin-top: 40px;
-            padding: 20px;
-            color: #7f8c8d;
-            font-size: 0.9rem;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>El Proceso Diagnóstico</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@300;400;600&family=Fraunces:ital,wght@0,300;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1208;
+    --parchment: #f5f0e8;
+    --cream: #faf7f2;
+    --rust: #8b3a1a;
+    --gold: #c8922a;
+    --sage: #4a6741;
+    --slate: #3d4f5c;
+    --blush: #c4705a;
+    --accent: #d4a853;
+    --border: #d6ccb8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'Fraunces', Georgia, serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Grain overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.4;
+  }
+
+  /* Header */
+  .header {
+    background: var(--ink);
+    color: var(--parchment);
+    padding: 3rem 2rem 2.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--rust), var(--gold), var(--sage), var(--gold), var(--rust));
+  }
+
+  .header-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    opacity: 0.8;
+  }
+
+  .header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 0.75rem;
+  }
+
+  .header h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .header-sub {
+    font-size: 1rem;
+    opacity: 0.65;
+    font-weight: 300;
+    font-style: italic;
+  }
+
+  /* Nav tabs */
+  .nav-container {
+    background: var(--ink);
+    padding: 0 2rem 1.5rem;
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .nav-tab {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.5rem 1.2rem;
+    border: 1px solid rgba(255,255,255,0.2);
+    background: transparent;
+    color: rgba(245,240,232,0.6);
+    cursor: pointer;
+    transition: all 0.25s ease;
+    border-radius: 2px;
+  }
+
+  .nav-tab:hover, .nav-tab.active {
+    background: var(--gold);
+    color: var(--ink);
+    border-color: var(--gold);
+  }
+
+  /* Main layout */
+  .main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem;
+  }
+
+  /* Section */
+  .section { display: none; animation: fadeSection 0.4s ease; }
+  .section.active { display: block; }
+
+  @keyframes fadeSection {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Section header */
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 4rem;
+    font-weight: 700;
+    color: var(--border);
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  .section-title-block h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    color: var(--ink);
+    margin-bottom: 0.3rem;
+  }
+
+  .section-title-block p {
+    font-size: 0.9rem;
+    color: var(--slate);
+    font-style: italic;
+    font-weight: 300;
+  }
+
+  /* Activity cards grid */
+  .activities-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .activity-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+  }
+
+  .activity-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(26,18,8,0.1);
+  }
+
+  .card-stripe {
+    height: 4px;
+  }
+
+  .stripe-cat { background: linear-gradient(90deg, var(--rust), var(--blush)); }
+  .stripe-func { background: linear-gradient(90deg, var(--sage), #7ab87a); }
+  .stripe-diff { background: linear-gradient(90deg, var(--slate), #7a95a8); }
+  .stripe-int { background: linear-gradient(90deg, var(--gold), var(--accent)); }
+
+  .card-body { padding: 1.5rem; }
+
+  .card-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .card-icon {
+    font-size: 1.4rem;
+    width: 2.2rem;
+    height: 2.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--parchment);
+    border-radius: 3px;
+  }
+
+  .card-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  .card-body h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    margin-bottom: 0.6rem;
+    line-height: 1.3;
+  }
+
+  .card-body p {
+    font-size: 0.88rem;
+    color: var(--slate);
+    line-height: 1.6;
+    font-weight: 300;
+    margin-bottom: 1rem;
+  }
+
+  .card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    padding: 0.2rem 0.5rem;
+    border: 1px solid var(--border);
+    color: var(--slate);
+    border-radius: 2px;
+  }
+
+  /* Interactive activity detail */
+  .activity-detail {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2rem;
+    margin-top: 2rem;
+    display: none;
+    animation: fadeSection 0.3s ease;
+  }
+
+  .activity-detail.open { display: block; }
+
+  .detail-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+  }
+
+  .detail-header h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+  }
+
+  .close-btn {
+    background: none;
+    border: 1px solid var(--border);
+    width: 2rem;
+    height: 2rem;
+    border-radius: 2px;
+    cursor: pointer;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--slate);
+    flex-shrink: 0;
+    transition: all 0.2s;
+  }
+
+  .close-btn:hover {
+    background: var(--ink);
+    color: white;
+    border-color: var(--ink);
+  }
+
+  /* Steps */
+  .steps { list-style: none; }
+
+  .step {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem 0;
+    border-bottom: 1px dashed var(--border);
+  }
+
+  .step:last-child { border-bottom: none; }
+
+  .step-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--border);
+    flex-shrink: 0;
+    width: 2rem;
+    line-height: 1;
+    margin-top: 0.1rem;
+  }
+
+  .step-content strong {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.3rem;
+  }
+
+  .step-content p {
+    font-size: 0.9rem;
+    color: var(--slate);
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  /* Case box */
+  .case-box {
+    background: var(--parchment);
+    border-left: 3px solid var(--rust);
+    padding: 1.2rem 1.5rem;
+    margin: 1.5rem 0;
+    border-radius: 0 3px 3px 0;
+  }
+
+  .case-box-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 0.5rem;
+  }
+
+  .case-box p {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--ink);
+    font-style: italic;
+    font-weight: 300;
+  }
+
+  /* Diagnostic grid tool */
+  .diag-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    overflow: hidden;
+    margin: 1.5rem 0;
+  }
+
+  .diag-cell {
+    background: white;
+    padding: 1rem;
+  }
+
+  .diag-cell-header {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  .diag-cell-header.cat { color: var(--rust); }
+  .diag-cell-header.func { color: var(--sage); }
+  .diag-cell-header.diff { color: var(--slate); }
+
+  .diag-cell textarea {
+    width: 100%;
+    min-height: 100px;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 0.6rem;
+    font-family: 'Fraunces', serif;
+    font-size: 0.82rem;
+    color: var(--ink);
+    resize: vertical;
+    background: var(--cream);
+    line-height: 1.5;
+    font-weight: 300;
+  }
+
+  .diag-cell textarea:focus {
+    outline: none;
+    border-color: var(--gold);
+    background: white;
+  }
+
+  /* Feedback / evaluation button */
+  .eval-btn {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.7rem 2rem;
+    background: var(--ink);
+    color: var(--parchment);
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: inline-block;
+  }
+
+  .eval-btn:hover { background: var(--rust); }
+
+  /* Checklist */
+  .checklist { list-style: none; }
+
+  .check-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.6rem 0;
+    border-bottom: 1px dashed var(--border);
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+
+  .check-item:last-child { border-bottom: none; }
+
+  .check-box {
+    width: 1.2rem;
+    height: 1.2rem;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    transition: all 0.2s;
+  }
+
+  .check-item.checked .check-box {
+    background: var(--sage);
+    border-color: var(--sage);
+    color: white;
+  }
+
+  .check-text {
+    font-size: 0.88rem;
+    color: var(--slate);
+    line-height: 1.5;
+    font-weight: 300;
+  }
+
+  .check-item.checked .check-text {
+    text-decoration: line-through;
+    opacity: 0.5;
+  }
+
+  /* Matrix comparison */
+  .matrix {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 0.85rem;
+  }
+
+  .matrix th {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.75rem 1rem;
+    background: var(--ink);
+    color: var(--parchment);
+    text-align: left;
+    font-weight: 400;
+  }
+
+  .matrix td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--border);
+    color: var(--slate);
+    line-height: 1.5;
+    font-weight: 300;
+    vertical-align: top;
+  }
+
+  .matrix tr:hover td { background: var(--parchment); }
+
+  .matrix td:first-child {
+    font-weight: 600;
+    color: var(--ink);
+    font-family: 'Playfair Display', serif;
+    font-size: 0.9rem;
+  }
+
+  /* Timer component */
+  .timer-bar {
+    background: var(--parchment);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 1rem 0;
+  }
+
+  .timer-display {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--ink);
+    letter-spacing: 0.05em;
+  }
+
+  .timer-btn {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.4rem 1rem;
+    border: 1px solid var(--border);
+    background: white;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: all 0.2s;
+  }
+
+  .timer-btn:hover { border-color: var(--gold); color: var(--rust); }
+
+  .timer-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--slate);
+    opacity: 0.7;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* Progress tracker */
+  .progress-section {
+    background: var(--ink);
+    color: var(--parchment);
+    padding: 1.5rem 2rem;
+    margin-bottom: 2rem;
+    border-radius: 4px;
+  }
+
+  .progress-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0.6;
+    margin-bottom: 0.75rem;
+  }
+
+  .progress-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .progress-name {
+    font-size: 0.82rem;
+    font-weight: 300;
+    width: 12rem;
+    flex-shrink: 0;
+  }
+
+  .progress-bar-bg {
+    flex: 1;
+    height: 4px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .progress-bar-fill {
+    height: 100%;
+    border-radius: 2px;
+    transition: width 0.6s ease;
+  }
+
+  .fill-cat { background: linear-gradient(90deg, var(--rust), var(--blush)); }
+  .fill-func { background: linear-gradient(90deg, var(--sage), #7ab87a); }
+  .fill-diff { background: linear-gradient(90deg, var(--slate), #7a95a8); }
+  .fill-int { background: linear-gradient(90deg, var(--gold), var(--accent)); }
+
+  .progress-pct {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    opacity: 0.7;
+    width: 2.5rem;
+    text-align: right;
+  }
+
+  /* Tabs within section */
+  .sub-tabs {
+    display: flex;
+    gap: 0;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .sub-tab {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.6rem 1.2rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--slate);
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    transition: all 0.2s;
+  }
+
+  .sub-tab:hover { color: var(--ink); }
+  .sub-tab.active { color: var(--rust); border-bottom-color: var(--rust); }
+
+  .sub-panel { display: none; }
+  .sub-panel.active { display: block; animation: fadeSection 0.3s ease; }
+
+  /* Flashcard */
+  .flashcard-area {
+    perspective: 1000px;
+    margin: 1.5rem 0;
+  }
+
+  .flashcard {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2.5rem;
+    text-align: center;
+    cursor: pointer;
+    min-height: 180px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.1s ease, box-shadow 0.2s ease;
+    position: relative;
+  }
+
+  .flashcard:hover { box-shadow: 0 6px 20px rgba(26,18,8,0.08); }
+
+  .flashcard-front-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    position: absolute;
+    top: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+  }
+
+  .flashcard-q {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+
+  .flashcard-a {
+    display: none;
+    font-size: 0.9rem;
+    color: var(--slate);
+    line-height: 1.6;
+    font-weight: 300;
+    font-style: italic;
+  }
+
+  .flashcard.revealed .flashcard-q { display: none; }
+  .flashcard.revealed .flashcard-a { display: block; }
+  .flashcard.revealed { border-color: var(--sage); }
+
+  .fc-controls {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .fc-btn {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.5rem 1.2rem;
+    border: 1px solid var(--border);
+    background: white;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: all 0.2s;
+    color: var(--slate);
+  }
+
+  .fc-btn.reveal { border-color: var(--gold); color: var(--gold); }
+  .fc-btn.reveal:hover { background: var(--gold); color: white; }
+  .fc-btn:hover { border-color: var(--ink); color: var(--ink); }
+
+  .fc-counter {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--slate);
+    opacity: 0.5;
+    text-align: center;
+    margin-top: 0.5rem;
+  }
+
+  /* Callout */
+  .callout {
+    background: var(--parchment);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 1.2rem 1.5rem;
+    margin: 1.5rem 0;
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .callout-icon { font-size: 1.1rem; flex-shrink: 0; }
+
+  .callout p {
+    font-size: 0.87rem;
+    color: var(--slate);
+    line-height: 1.6;
+    font-weight: 300;
+    font-style: italic;
+  }
+
+  /* Responsive */
+  @media (max-width: 680px) {
+    .activities-grid { grid-template-columns: 1fr; }
+    .diag-grid { grid-template-columns: 1fr; }
+    .section-header { flex-direction: column; gap: 0.5rem; }
+    .section-number { font-size: 2.5rem; }
+  }
+</style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1>Casos Clínicos - Psicopatología</h1>
-            <p>Análisis de casos complejos para estudiantes de Psicología y Criminología</p>
-        </div>
-    </header>
-    
-    <div class="container">
-        <!-- Pantalla de instrucciones -->
-        <div id="instructions-screen">
-            <div class="card instructions">
-                <h2>Instrucciones para el Análisis de Casos</h2>
-                
-                <h3>Para Estudiantes de Psicología:</h3>
-                <p>Al analizar cada caso clínico, deberás:</p>
-                <ul style="margin-left: 20px; margin-bottom: 15px;">
-                    <li>Identificar los 3 trastornos que mejor expliquen la condición del paciente</li>
-                    <li>Ordenarlos jerárquicamente según su relevancia diagnóstica</li>
-                    <li>Para cada trastorno, justificar tu elección señalando qué criterios diagnósticos cumple según el DSM-5-TR</li>
-                    <li>Considerar posibles diagnósticos diferenciales y comorbilidades</li>
-                </ul>
-                
-                <h3>Para Estudiantes de Criminología:</h3>
-                <p>Al analizar cada caso, deberás:</p>
-                <ul style="margin-left: 20px; margin-bottom: 15px;">
-                    <li>Identificar los 3 trastornos que puedan estar relacionados con la conducta delictiva o antisocial</li>
-                    <li>Ordenarlos jerárquicamente según su influencia en el comportamiento</li>
-                    <li>Para cada trastorno, justificar tu elección señalando qué criterios diagnósticos cumple según el DSM-5-TR</li>
-                    <li>Analizar la posible relación entre la psicopatología y la conducta delictiva</li>
-                </ul>
-                
-                <p><strong>Nota:</strong> Los casos están diseñados para ser complejos y requerir un análisis cuidadoso de los criterios diagnósticos.</p>
-                
-                <div style="text-align: center; margin-top: 25px;">
-                    <button id="start-button">Comenzar con Casos de Criminología</button>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Pantalla de casos -->
-        <div id="cases-screen" class="hidden">
-            <div class="case-counter">
-                Caso <span id="current-case">1</span> de <span id="total-cases">6</span>
-            </div>
-            
-            <div class="progress-bar">
-                <div class="progress" id="progress-bar"></div>
-            </div>
-            
-            <div class="card case-card">
-                <span id="specialty-badge" class="specialty-badge criminology-badge">Criminología</span>
-                <h2 id="case-title">Caso Criminología 1</h2>
-                
-                <div class="case-content">
-                    <p id="case-text">Cargando caso...</p>
-                </div>
-                
-                <div class="case-navigation">
-                    <button id="prev-button" disabled>Anterior</button>
-                    <button id="next-button">Siguiente</button>
-                </div>
-            </div>
-        </div>
+
+<header class="header">
+  <div class="header-tag">Psicología Clínica · Aprendizaje basado en problemas</div>
+  <h1>El Proceso <em>Diagnóstico</em></h1>
+  <p class="header-sub">Actividades de formación clínica en diagnóstico categorial, funcional y diferencial</p>
+</header>
+
+<nav class="nav-container">
+  <button class="nav-tab active" onclick="showSection('overview')">Inicio</button>
+  <button class="nav-tab" onclick="showSection('categorial')">Categorial</button>
+  <button class="nav-tab" onclick="showSection('funcional')">Funcional</button>
+  <button class="nav-tab" onclick="showSection('diferencial')">Diferencial</button>
+  <button class="nav-tab" onclick="showSection('integrado')">Integrado</button>
+  <button class="nav-tab" onclick="showSection('flashcards')">Tarjetas</button>
+</nav>
+
+<main class="main">
+
+  <!-- INICIO -->
+  <section class="section active" id="overview">
+    <div class="section-header">
+      <div class="section-number">00</div>
+      <div class="section-title-block">
+        <h2>Marco de Aprendizaje</h2>
+        <p>Aprendizaje basado en problemas</p>
+      </div>
     </div>
-    
-    <footer>
-        <div class="container">
-            <p>Material para uso educativo - Psicopatología - Basado en criterios DSM-5-TR</p>
+
+    <div class="progress-section">
+      <div class="progress-label">Progreso por módulo</div>
+      <div class="progress-row">
+        <div class="progress-name">Diagnóstico Categorial</div>
+        <div class="progress-bar-bg"><div class="progress-bar-fill fill-cat" id="prog-cat" style="width:0%"></div></div>
+        <div class="progress-pct" id="pct-cat">0%</div>
+      </div>
+      <div class="progress-row">
+        <div class="progress-name">Diagnóstico Funcional</div>
+        <div class="progress-bar-bg"><div class="progress-bar-fill fill-func" id="prog-func" style="width:0%"></div></div>
+        <div class="progress-pct" id="pct-func">0%</div>
+      </div>
+      <div class="progress-row">
+        <div class="progress-name">Diagnóstico Diferencial</div>
+        <div class="progress-bar-bg"><div class="progress-bar-fill fill-diff" id="prog-diff" style="width:0%"></div></div>
+        <div class="progress-pct" id="pct-diff">0%</div>
+      </div>
+      <div class="progress-row">
+        <div class="progress-name">Integración Clínica</div>
+        <div class="progress-bar-bg"><div class="progress-bar-fill fill-int" id="prog-int" style="width:0%"></div></div>
+        <div class="progress-pct" id="pct-int">0%</div>
+      </div>
+    </div>
+
+    <div class="activities-grid">
+      <div class="activity-card" onclick="showSection('categorial')">
+        <div class="card-stripe stripe-cat"></div>
+        <div class="card-body">
+          <div class="card-meta">
+            <div class="card-icon">🗂️</div>
+            <div class="card-label">Módulo 1</div>
+          </div>
+          <h3>Diagnóstico Categorial</h3>
+          <p>Clasificación según sistemas nosológicos (DSM-5-TR / CIE-11). Criterios diagnósticos, especificadores y aplicación clínica.</p>
+          <div class="card-tags">
+            <span class="tag">DSM-5-TR</span>
+            <span class="tag">CIE-11</span>
+            <span class="tag">Criterios</span>
+          </div>
         </div>
-    </footer>
+      </div>
 
-    <script>
-        // Datos de los casos clínicos adaptados al contexto mexicano
-        const cases = [
-            {
-                specialty: "Criminología",
-                title: "Caso 1 - Comportamiento impulsivo y agresivo",
-                text: "El trabajador social del Centro de Internamiento Especializado para Adolescentes en Guadalajara describe a Carlos, de 16 años: 'Su historial es de impulsividad desde pequeño: lo expulsaron de tres secundarias por pleitos y por responder agresivamente a los maestros. Los reportes escolares ya mencionaban su incapacidad para permanecer sentado y su tendencia a actuar sin pensar. Ahora está con nosotros por robo a una tienda de conveniencia, un acto que según él fue 'sin pensar, se me ocurrió en el momento'. No muestra remordimiento, pero tampoco planea sus actos. Parece vivir al día, sin considerar las consecuencias. Su familia reporta que de pequeño era imposible dejarlo solo en casa, porque entraba en pánico, pero eso ha ido desapareciendo con los años.'"
-            },
-            {
-                specialty: "Criminología",
-                title: "Caso 2 - Estafas telefónicas y dificultades sociales",
-                text: "'Sé que lo que hice estuvo mal, lo de las estafas por teléfono donde me hacía pasar por empleado del banco. Pero es que las reglas nunca han sido lo mío. La gente dice una cosa y quiere decir otra, y yo me lo tomo literal y luego soy yo el que queda como tonto. Mis compañeros en el call center de la Ciudad de México se reían de mí porque no captaba sus indirectas ni sus albures. Yo solo quería demostrar que podía ser tan listo como ellos. Cuando diseñé el esquema de la estafa, me obsesioné con los detalles técnicos, era un sistema perfecto. Nunca pensé en cómo se sentirían las víctimas, muchos eran adultos mayores, eso es algo que, honestamente, no se me cruzó por la cabeza. Para mí era un rompecabezas, no un delito contra personas.'"
-            },
-            {
-                specialty: "Criminología",
-                title: "Caso 3 - Robo en tiendas y ansiedad",
-                text: "La hermana de Fernanda, una mujer de 24 años actualmente en libertad condicional por robo en tiendas departamentales, relata: 'Fernanda siempre ha sido muy nerviosa. De niña, si nuestra mamá se perdía de vista en el mercado o en el Walmart, entraba en pánico. Ahora de adulta, tiene que llevar siempre su celular con la ubicación compartida conmigo. Los robos siempre ocurren los días en que yo tengo que viajar por trabajo a Monterrey. Ella lo niega, pero yo estoy segura. Cuando la detuvieron en el Liverpool, dijo que sintió que no podía respirar en el centro comercial y que agarrar esas cosas sin pagar fue un acto sin pensar, para calmar los nervios. En casa, todavía a veces se orina en la cama cuando está bajo mucho estrés, como la semana antes de uno de mis viajes.'"
-            },
-            {
-                specialty: "Psicología",
-                title: "Caso 4 - Dificultades de atención y apego",
-                text: "'Siempre he sido un desastre para organizarme. En la oficina en Puebla donde trabajo, empiezo mil cosas a la vez y no termino ninguna, me distraigo con el más mínimo ruido y ya he recibido un par de llamadas de atención por mis errores por descuido. Pero lo que de verdad me angustia es la sensación constante de pánico cuando mi esposa se va de casa, aunque sea a la tienda de la esquina. Me quedo paralizado, reviso el WhatsApp cada minuto, y no logro concentrarme en nada hasta que no regresa. Esto empezó de pequeño, recuerdo que a los diez años ya era una pesadilla cuando mis papás se iban, pero ahora de adulto es insoportable y está arruinando mi relación y mi trabajo.'"
-            },
-            {
-                specialty: "Psicología",
-                title: "Caso 5 - Dificultades sociales en un niño",
-                text: "La mamá de Diego, un niño de 8 años de Mérida, comenta con preocupación: 'En la primaria nos dicen que es muy inteligente, pero que no socializa. Se pasa el recreo solo, caminando de un lado a otro. Cuando otros niños se le acercan, él les habla solo de dinosaurios, con un lenguaje tan técnico que nadie le entiende. En casa, si cambiamos la ruta del carro de la escuela a casa, hace un berrinche tremendo que puede durar media hora. No es que no hable, habla muchísimo, pero parece que no sabe cómo jugar con los demás. Hemos notado que a veces no responde cuando lo llaman por su nombre, como si no oyera, pero el pediatra del IMSS dice que su audición es perfecta.'"
-            },
-            {
-                specialty: "Psicología",
-                title: "Caso 6 - Dificultades del lenguaje y ansiedad",
-                text: "'Desde que tengo memoria, las palabras han sido mi enemigo. Mis ideas son claras en mi cabeza, pero al hablar, los sonidos salen revueltos y la gente me mira con cara de no entender nada. En la prepa en León me evitaban porque era 'el raro' que no se expresaba bien. Ahora, con 22 años, evito cualquier situación donde tenga que hablar en público o mantener una plática casual. Me da tanto miedo quedar en ridículo que prefiero quedarme callado, lo que hace que parezco grosero o antipático. Esto no es pena, es una frustración constante porque sé lo que quiero decir, pero mi boca no me obedece.'"
-            }
-        ];
+      <div class="activity-card" onclick="showSection('funcional')">
+        <div class="card-stripe stripe-func"></div>
+        <div class="card-body">
+          <div class="card-meta">
+            <div class="card-icon">⚙️</div>
+            <div class="card-label">Módulo 2</div>
+          </div>
+          <h3>Diagnóstico Funcional</h3>
+          <p>Análisis funcional del comportamiento, cadenas conductuales, variables de control y formulación del caso clínico.</p>
+          <div class="card-tags">
+            <span class="tag">Análisis ABC</span>
+            <span class="tag">Formulación</span>
+            <span class="tag">Hipótesis</span>
+          </div>
+        </div>
+      </div>
 
-        // Elementos DOM
-        const instructionsScreen = document.getElementById('instructions-screen');
-        const casesScreen = document.getElementById('cases-screen');
-        const startButton = document.getElementById('start-button');
-        const prevButton = document.getElementById('prev-button');
-        const nextButton = document.getElementById('next-button');
-        const currentCaseElement = document.getElementById('current-case');
-        const totalCasesElement = document.getElementById('total-cases');
-        const progressBar = document.getElementById('progress-bar');
-        const specialtyBadge = document.getElementById('specialty-badge');
-        const caseTitle = document.getElementById('case-title');
-        const caseText = document.getElementById('case-text');
-        
-        // Variables de estado
-        let currentCaseIndex = 0;
-        totalCasesElement.textContent = cases.length;
-        
-        // Actualizar la barra de progreso
-        function updateProgressBar() {
-            const progress = ((currentCaseIndex + 1) / cases.length) * 100;
-            progressBar.style.width = `${progress}%`;
-        }
-        
-        // Mostrar caso actual
-        function showCurrentCase() {
-            const currentCase = cases[currentCaseIndex];
-            
-            // Actualizar elementos de la interfaz
-            currentCaseElement.textContent = currentCaseIndex + 1;
-            caseTitle.textContent = currentCase.title;
-            caseText.textContent = currentCase.text;
-            
-            // Actualizar badge de especialidad
-            specialtyBadge.textContent = currentCase.specialty;
-            specialtyBadge.className = 'specialty-badge ' + 
-                (currentCase.specialty === 'Criminología' ? 'criminology-badge' : 'psychology-badge');
-            
-            // Actualizar estado de los botones
-            prevButton.disabled = currentCaseIndex === 0;
-            nextButton.textContent = currentCaseIndex === cases.length - 1 ? 'Finalizar' : 'Siguiente';
-            
-            // Actualizar barra de progreso
-            updateProgressBar();
-        }
-        
-        // Event Listeners
-        startButton.addEventListener('click', () => {
-            instructionsScreen.classList.add('hidden');
-            casesScreen.classList.remove('hidden');
-            showCurrentCase();
-        });
-        
-        prevButton.addEventListener('click', () => {
-            if (currentCaseIndex > 0) {
-                currentCaseIndex--;
-                showCurrentCase();
-            }
-        });
-        
-        nextButton.addEventListener('click', () => {
-            if (currentCaseIndex < cases.length - 1) {
-                currentCaseIndex++;
-                showCurrentCase();
-            } else {
-                // Al finalizar, mostrar mensaje de finalización
-                alert('¡Has completado todos los casos! Revisa tus análisis con tu profesor.');
-            }
-        });
-        
-        // Inicializar
-        updateProgressBar();
-    </script>
+      <div class="activity-card" onclick="showSection('diferencial')">
+        <div class="card-stripe stripe-diff"></div>
+        <div class="card-body">
+          <div class="card-meta">
+            <div class="card-icon">⚖️</div>
+            <div class="card-label">Módulo 3</div>
+          </div>
+          <h3>Diagnóstico Diferencial</h3>
+          <p>Discriminación entre categorías diagnósticas superpuestas, análisis de comorbilidades y decisión clínica razonada.</p>
+          <div class="card-tags">
+            <span class="tag">Comorbilidad</span>
+            <span class="tag">Árbol diagnóstico</span>
+            <span class="tag">Toma de decisión</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="activity-card" onclick="showSection('integrado')">
+        <div class="card-stripe stripe-int"></div>
+        <div class="card-body">
+          <div class="card-meta">
+            <div class="card-icon">🧩</div>
+            <div class="card-label">Módulo 4</div>
+          </div>
+          <h3>Diagnóstico Integrado</h3>
+          <p>Integración de los tres niveles en informes clínicos completos. Casos complejos con formulación multiaxial.</p>
+          <div class="card-tags">
+            <span class="tag">Informe clínico</span>
+            <span class="tag">Multiaxial</span>
+            <span class="tag">Supervisión</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <div class="callout-icon">💡</div>
+      <p>Este módulo está diseñado bajo el enfoque de <strong>aprendizaje basado en problemas</strong> para psicólogos en formación y clínicos que buscan profundizar en razonamiento diagnóstico. Cada actividad combina teoría, práctica reflexiva y autoevaluación. Las actividades interactivas permiten registrar notas, cronometrar ejercicios y hacer seguimiento del aprendizaje.</p>
+    </div>
+  </section>
+
+  <!-- CATEGORIAL -->
+  <section class="section" id="categorial">
+    <div class="section-header">
+      <div class="section-number">01</div>
+      <div class="section-title-block">
+        <h2>Diagnóstico Categorial</h2>
+        <p>Clasificación nosológica y aplicación de criterios diagnósticos</p>
+      </div>
+    </div>
+
+    <div class="sub-tabs">
+      <button class="sub-tab active" onclick="showSubPanel('cat','teoria')">Teoría</button>
+      <button class="sub-tab" onclick="showSubPanel('cat','actividad1')">Actividad 1</button>
+      <button class="sub-tab" onclick="showSubPanel('cat','actividad2')">Actividad 2</button>
+      <button class="sub-tab" onclick="showSubPanel('cat','actividad3')">Actividad 3</button>
+    </div>
+
+    <div class="sub-panel active" id="cat-teoria">
+      <table class="matrix">
+        <thead>
+          <tr>
+            <th>Dimensión</th>
+            <th>DSM-5-TR</th>
+            <th>CIE-11</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Organización</td>
+            <td>Capítulos por espectros (ej. Espectro Esquizofrénico)</td>
+            <td>Capítulos clínicos con codificación alfanumérica</td>
+          </tr>
+          <tr>
+            <td>Criterios</td>
+            <td>A, B, C, D… con número mínimo de síntomas</td>
+            <td>Características esenciales + características cualificadoras</td>
+          </tr>
+          <tr>
+            <td>Especificadores</td>
+            <td>Severidad, subtipo, remisión, inicio</td>
+            <td>Extensiones de código (postcoordinación)</td>
+          </tr>
+          <tr>
+            <td>Enfoque</td>
+            <td>Primordialmente categorial con dimensional</td>
+            <td>Mayor énfasis dimensional (CPTSD, Trastornos PQ)</td>
+          </tr>
+          <tr>
+            <td>Uso clínico</td>
+            <td>EE.UU., amplio uso en investigación</td>
+            <td>Internacional, sistemas de salud públicos</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="callout">
+        <div class="callout-icon">📌</div>
+        <p>El diagnóstico categorial ofrece fiabilidad interjueces y facilita la comunicación clínica, pero tiene limitaciones: no captura la heterogeneidad individual, favorece la comorbilidad artificial y puede ignorar el contexto cultural y funcional del paciente.</p>
+      </div>
+    </div>
+
+    <div class="sub-panel" id="cat-actividad1">
+      <h3 style="font-family:'Playfair Display',serif; margin-bottom:1rem;">Actividad 1 · Aplicación de Criterios Diagnósticos</h3>
+
+      <div class="timer-bar">
+        <div class="timer-display" id="timer-cat1">25:00</div>
+        <button class="timer-btn" onclick="startTimer('cat1', 25)">Iniciar</button>
+        <button class="timer-btn" onclick="resetTimer('cat1', 25)">Reiniciar</button>
+        <div class="timer-label">Tiempo sugerido: 25 min</div>
+      </div>
+
+      <div class="case-box">
+        <div class="case-box-label">Viñeta Clínica — Caso "A.M."</div>
+        <p>A.M., 34 años, consulta por primera vez. Refiere que desde hace 8 meses se despierta cada madrugada con palpitaciones, sensación de ahogarse y convicción de que algo terrible le va a ocurrir. Durante el día evita el transporte público "por si me da algo". Ha dejado su trabajo de oficina porque "no puedo concentrarme". Reporta 3–4 episodios semanales de sudoración intensa, temblores y mareos, que duran entre 10 y 30 minutos. Niega consumo de sustancias. Analítica reciente dentro de parámetros normales.</p>
+      </div>
+
+      <ol class="steps">
+        <li class="step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <strong>Identificación de síntomas nucleares</strong>
+            <p>Lista todos los síntomas presentes en la viñeta. Clasifícalos en: cognitivos, somáticos, conductuales y emocionales. Identifica cuáles son núcleos (patognomónicos) y cuáles son inespecíficos.</p>
+          </div>
+        </li>
+        <li class="step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <strong>Contraste con criterios DSM-5-TR</strong>
+            <p>Aplica los criterios del Trastorno de Pánico (300.01) y del Trastorno de Ansiedad Generalizada (300.02). ¿Cuáles se cumplen? ¿Cuáles son dudosos? Justifica con la información de la viñeta.</p>
+          </div>
+        </li>
+        <li class="step">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <strong>Especificadores y duración</strong>
+            <p>Determina la duración del episodio actual, la severidad (leve/moderada/grave) y si hay especificadores aplicables (ej. agorafobia asociada). ¿La duración cumple el criterio temporal mínimo?</p>
+          </div>
+        </li>
+        <li class="step">
+          <div class="step-num">4</div>
+          <div class="step-content">
+            <strong>Exclusión de causas médicas y sustancias</strong>
+            <p>Revisa el criterio de exclusión (Criterio D/E). ¿Qué información de la viñeta ya ayuda a descartar? ¿Qué información adicional solicitarías?</p>
+          </div>
+        </li>
+        <li class="step">
+          <div class="step-num">5</div>
+          <div class="step-content">
+            <strong>Formulación diagnóstica provisional</strong>
+            <p>Redacta una conclusión diagnóstica categorial con código DSM-5-TR, especificadores y nivel de certeza (provisional / definitivo). Reflexiona: ¿Qué aspectos del caso NO queda reflejados en este diagnóstico?</p>
+          </div>
+        </li>
+      </ol>
+
+      <button class="eval-btn" onclick="markProgress('cat', 33)">✓ Marcar actividad como completada</button>
+    </div>
+
+    <div class="sub-panel" id="cat-actividad2">
+      <h3 style="font-family:'Playfair Display',serif; margin-bottom:1rem;">Actividad 2 · Comparación Nosológica DSM vs CIE</h3>
+
+      <div class="timer-bar">
+        <div class="timer-display" id="timer-cat2">20:00</div>
+        <button class="timer-btn" onclick="startTimer('cat2', 20)">Iniciar</button>
+        <button class="timer-btn" onclick="resetTimer('cat2', 20)">Reiniciar</button>
+        <div class="timer-label">Tiempo sugerido: 20 min</div>
+      </div>
+
+      <p style="font-size:0.9rem; color:var(--slate); margin-bottom:1.5rem; font-weight:300; line-height:1.6;">Toma el mismo caso de A.M. y aplica los criterios equivalentes en CIE-11. Usa la tabla comparativa para registrar convergencias y divergencias.</p>
+
+      <div class="diag-grid" style="grid-template-columns: 1fr 1fr; margin-bottom:1.5rem;">
+        <div class="diag-cell">
+          <div class="diag-cell-header cat">DSM-5-TR</div>
+          <textarea placeholder="Diagnóstico principal con código, especificadores y justificación de criterios A-E..."></textarea>
+        </div>
+        <div class="diag-cell">
+          <div class="diag-cell-header diff">CIE-11</div>
+          <textarea placeholder="Código CIE-11, características esenciales presentes, extensiones de código..."></textarea>
+        </div>
+      </div>
+
+      <ol class="steps">
+        <li class="step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <strong>Equivalencia diagnóstica</strong>
+            <p>¿Existe categoría equivalente en CIE-11? Localiza el código y compara las "características esenciales" con los criterios A-C del DSM-5. ¿Son más amplios o más restrictivos?</p>
+          </div>
+        </li>
+        <li class="step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <strong>Divergencias clínicas</strong>
+            <p>Identifica al menos 2 diferencias conceptuales o de criterio entre ambos sistemas. ¿Alguna diferencia podría llevar a un diagnóstico diferente para A.M.?</p>
+          </div>
+        </li>
+        <li class="step">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <strong>Reflexión crítica</strong>
+            <p>¿Qué sistema consideras más adecuado para este caso en un contexto de práctica clínica pública? ¿Y en investigación? Argumenta tu posición.</p>
+          </div>
+        </li>
+      </ol>
+
+      <button class="eval-btn" onclick="markProgress('cat', 66)">✓ Marcar actividad como completada</button>
+    </div>
+
+    <div class="sub-panel" id="cat-actividad3">
+      <h3 style="font-family:'Playfair Display',serif; margin-bottom:1rem;">Actividad 3 · Debate: Limitaciones del Diagnóstico Categorial</h3>
+
+      <p style="font-size:0.9rem; color:var(--slate); margin-bottom:1.5rem; font-weight:300; line-height:1.6;">Esta actividad está diseñada para trabajo en pequeño grupo (2–4 personas) o reflexión individual estructurada.</p>
+
+      <div class="callout">
+        <div class="callout-icon">🗣️</div>
+        <p>Formato: Debate socrático de 30 minutos. Asignad roles: un clínico defensor del sistema categorial, un investigador crítico y un paciente/familiar. Usad los puntos de debate siguientes como estructura.</p>
+      </div>
+
+      <ul class="checklist" id="debate-list">
+        <li class="check-item" onclick="toggleCheck(this)">
+          <div class="check-box"></div>
+          <div class="check-text"><strong>Punto 1:</strong> ¿El umbral de criterios es arbitrario o clínicamente válido? (ej. 5 de 9 síntomas en Episodio Depresivo Mayor)</div>
+        </li>
+        <li class="check-item" onclick="toggleCheck(this)">
+          <div class="check-box"></div>
+          <div class="check-text"><strong>Punto 2:</strong> ¿La comorbilidad es una realidad clínica o un artefacto de la categorización?</div>
+        </li>
+        <li class="check-item" onclick="toggleCheck(this)">
+          <div class="check-box"></div>
+          <div class="check-text"><strong>Punto 3:</strong> ¿Los diagnósticos categoriales están suficientemente validados transculturalmente?</div>
+        </li>
+        <li class="check-item" onclick="toggleCheck(this)">
+          <div class="check-box"></div>
+          <div class="check-text"><strong>Punto 4:</strong> ¿Puede un diagnóstico categorial guiar el tratamiento sin un análisis funcional?</div>
+        </li>
+        <li class="check-item" onclick="toggleCheck(this)">
+          <div class="check-box"></div>
+          <div class="check-text"><strong>Punto 5:</strong> Implicaciones éticas: etiquetado, estigma y acceso a servicios</div>
+        </li>
+      </ul>
+
+      <button class="eval-btn" style="margin-top:1.5rem;" onclick="markProgress('cat', 100)">✓ Marcar actividad como completada</button>
+    </div>
+  </section>
+
+  <!-- FUNCIONAL -->
+  <section class="section" id="funcional">
+    <div class="section-header">
+      <div class="section-number">02</div>
+      <div class="section-title-block">
+        <h2>Diagnóstico Funcional</h2>
+        <p>Análisis de variables controladoras y formulación del caso</p>
+      </div>
+    </div>
+
+    <div class="sub-tabs">
+      <button class="sub-tab active" onclick="showSubPanel('func','teoria')">Teoría</button>
+      <button class="sub-tab" onclick="showSubPanel('func','actividad1')">Actividad 1</button>
+      <button class="sub-tab" onclick="showSubPanel('func','actividad2')">Actividad 2</button>
+    </div>
+
+    <div class="sub-panel active" id="func-teoria">
+      <table class="matrix">
+        <thead>
+          <tr>
+            <th>Componente</th>
+            <th>Descripción</th>
+            <th>Preguntas clave</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Antecedentes (A)</td>
+            <td>Estímulos discriminativos o elicitadores que preceden a la conducta</td>
+            <td>¿Dónde, cuándo, con quién ocurre? ¿Qué lo provoca?</td>
+          </tr>
+          <tr>
+            <td>Conducta (B)</td>
+            <td>Respuesta observable o inferida (motora, cognitiva, fisiológica, emocional)</td>
+            <td>¿Qué hace exactamente? ¿Frecuencia, duración, intensidad?</td>
+          </tr>
+          <tr>
+            <td>Consecuencias (C)</td>
+            <td>Reforzadores positivos/negativos o castigos que mantienen la conducta</td>
+            <td>¿Qué obtiene o evita? ¿Quién responde y cómo?</td>
+          </tr>
+          <tr>
+            <td>Variables organísmicas</td>
+            <td>Historia de aprendizaje, estado biológico, variables genéticas</td>
+            <td>¿Qué factores internos modulan la respuesta?</td>
+          </tr>
+          <tr>
+            <td>Función de la conducta</td>
+            <td>La razón por la que se mantiene (evitación, atención, acceso a estimulación)</td>
+            <td>¿Para qué sirve esta conducta en el repertorio del paciente?</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="sub-panel" id="func-actividad1">
+      <h3 style="font-family:'Playfair Display',serif; margin-bottom:1rem;">Actividad 1 · Análisis Funcional en Tres Niveles</h3>
+
+      <div class="timer-bar">
+        <div class="timer-display" id="timer-func1">35:00</div>
+        <button class="timer-btn" onclick="startTimer('func1', 35)">Iniciar</button>
+        <button class="timer-btn" onclick="resetTimer('func1', 35)">Reiniciar</button>
+        <div class="timer-label">Tiempo sugerido: 35 min</div>
+      </div>
+
+      <div class="case-box">
+        <div class="case-box-label">Viñeta Clínica — Caso "R.L."</div>
+        <p>R.L., 27 años, estudiante de posgrado. Acude porque "procrastina todo". Describe que cuando tiene que entregar un trabajo, pasa horas revisando las redes sociales hasta que se le hace tarde y lo entrega sin revisar. Luego se siente avergonzado y se dice "soy un inútil". Sus padres siempre lo calificaron de "brillante" y él teme decepcionar. Refiere que cuando finalmente entrega y le va bien, "el alivio dura poco". Duerme mal los días previos a las entregas. Niega ansiedad generalizada entre periodos académicos.</p>
+      </div>
+
+      <p style="font-size:0.88rem; color:var(--slate); font-weight:300; margin-bottom:1rem; font-style:italic;">Completa la matriz de análisis funcional. Puedes escribir directamente en los campos.</p>
+
+      <div class="diag-grid">
+        <div class="diag-cell">
+          <div class="diag-cell-header cat">Antecedentes (A)</div>
+          <textarea placeholder="Estímulos internos y externos que preceden la conducta problema. Incluye historia de aprendizaje relevante..."></textarea>
+        </div>
+        <div class="diag-cell">
+          <div class="diag-cell-header func">Conducta (B)</div>
+          <textarea placeholder="Conducta problema en sus cuatro modalidades: motora, cognitiva, fisiológica, emocional. Especifica frecuencia y duración estimada..."></textarea>
+        </div>
+        <div class="diag-cell">
+          <div class="diag-cell-header diff">Consecuencias (C)</div>
+          <textarea placeholder="¿Qué refuerza la conducta? Identifica reforzamiento negativo (evitación), positivo, y consecuencias a corto vs. largo plazo..."></textarea>
+        </div>
+      </div>
+
+      <ol class="steps" style="margin-top:1.5rem;">
+        <li class="step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <strong>Hipótesis funcional</strong>
+            <p>Redacta la hipótesis en formato: "La conducta [X] está controlada por [antecedentes] y se mantiene por [consecuencias], cuya función es [evitar/obtener]..."</p>
+          </div>
+        </li>
+        <li class="step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <strong>Cadena conductual</strong>
+            <p>Dibuja (o describe textualmente) la secuencia A → B → C → A' para este caso. ¿Hay un ciclo de mantenimiento? ¿Dónde se podría interrumpir?</p>
+          </div>
+        </li>
+        <li class="step">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <strong>De la función al tratamiento</strong>
+            <p>¿Qué implica esta hipótesis funcional para el diseño del tratamiento? ¿Qué técnica abordaría cada eslabón de la cadena?</p>
+          </div>
+        </li>
+      </ol>
+
+      <button class="eval-btn" onclick="markProgress('func', 50)">✓ Marcar actividad como completada</button>
+    </div>
+
+    <div class="sub-panel" id="func-actividad2">
+      <h3 style="font-family:'Playfair Display',serif; margin-bottom:1rem;">Actividad 2 · Formulación de Caso Clínico (Modelo Biopsicosocial)</h3>
+
+      <div class="timer-bar">
+        <div class="timer-display" id="timer-func2">45:00</div>
+        <button class="timer-btn" onclick="startTimer('func2', 45)">Iniciar</button>
+        <button class="timer-btn" onclick="resetTimer('func2', 45)">Reiniciar</button>
+        <div class="timer-label">Tiempo sugerido: 45 min</div>
+      </div>
+
+      <p style="font-size:0.9rem; color:var(--slate); margin-bottom:1rem; font-weight:300; line-height:1.6;">Usando el caso R.L., desarrolla una formulación clínica completa según el modelo de las 4 P (Predisponentes, Precipitantes, Perpetuantes, Protectores).</p>
+
+      <div class="diag-grid" style="grid-template-columns: 1fr 1fr;">
+        <div class="diag-cell">
+          <div class="diag-cell-header cat">Predisponentes</div>
+          <textarea placeholder="Factores biológicos, psicológicos y sociales previos que aumentan la vulnerabilidad. Historia evolutiva, temperamento, aprendizaje temprano..."></textarea>
+        </div>
+        <div class="diag-cell">
+          <div class="diag-cell-header func">Precipitantes</div>
+          <textarea placeholder="Eventos o circunstancias que desencadenaron el problema actual. ¿Qué ocurrió justo antes del inicio?"></textarea>
+        </div>
+        <div class="diag-cell">
+          <div class="diag-cell-header diff">Perpetuantes</div>
+          <textarea placeholder="Factores que mantienen el problema. Incluye mecanismos cognitivos, conductuales, relacionales y biológicos..."></textarea>
+        </div>
+        <div class="diag-cell">
+          <div class="diag-cell-header" style="color:var(--gold);">Protectores</div>
+          <textarea placeholder="Recursos, fortalezas y factores de resiliencia. ¿Qué ha impedido que el problema sea más grave?"></textarea>
+        </div>
+      </div>
+
+      <button class="eval-btn" style="margin-top:1.5rem;" onclick="markProgress('func', 100)">✓ Marcar actividad como completada</button>
+    </div>
+  </section>
+
+  <!-- DIFERENCIAL -->
+  <section class="section" id="diferencial">
+    <div class="section-header">
+      <div class="section-number">03</div>
+      <div class="section-title-block">
+        <h2>Diagnóstico Diferencial</h2>
+        <p>Discriminación diagnóstica y razonamiento clínico avanzado</p>
+      </div>
+    </div>
+
+    <div class="sub-tabs">
+      <button class="sub-tab active" onclick="showSubPanel('diff','actividad1')">Actividad 1</button>
+      <button class="sub-tab" onclick="showSubPanel('diff','actividad2')">Actividad 2</button>
+      <button class="sub-tab" onclick="showSubPanel('diff','actividad3')">Árbol diagnóstico</button>
+    </div>
+
+    <div class="sub-panel active" id="diff-actividad1">
+      <h3 style="font-family:'Playfair Display',serif; margin-bottom:1rem;">Actividad 1 · Debate Clínico: ¿Depresión o Duelo?</h3>
+
+      <div class="case-box">
+        <div class="case-box-label">Viñeta Clínica — Caso "M.T."</div>
+        <p>M.T., 58 años. Viuda desde hace 7 meses. Refiere tristeza intensa, llora a diario, ha perdido 6 kg desde el fallecimiento de su esposo. Duerme mal, se despierta "esperando oírle". No sale de casa "¿para qué?". Refiere sentirse "vacía" y en ocasiones piensa que "sería mejor estar con él". Mantiene relaciones con su hija y nietos. Dice que "en el fondo sé que la vida sigue, pero no lo siento así". Ha rechazado invitaciones sociales sistemáticamente.</p>
+      </div>
+
+      <table class="matrix">
+        <thead>
+          <tr>
+            <th>Criterio</th>
+            <th>Duelo Normal (DSM-5)</th>
+            <th>Episodio Depresivo Mayor</th>
+            <th>Duelo Prolongado (CIE-11)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Temporalidad</td>
+            <td>Esperable tras pérdida significativa</td>
+            <td>≥ 2 semanas, no necesariamente tras pérdida</td>
+            <td>≥ 6 meses con deterioro significativo</td>
+          </tr>
+          <tr>
+            <td>Contenido del dolor</td>
+            <td>Centrado en la pérdida; puede haber alivio transitorio</td>
+            <td>Disforia generalizada; anhedonia pervasiva</td>
+            <td>Anhelo intenso; dificultad para aceptar la muerte</td>
+          </tr>
+          <tr>
+            <td>Autoestima</td>
+            <td>Generalmente preservada</td>
+            <td>Frecuente baja autoestima, culpa excesiva</td>
+            <td>Puede preservarse pero con identidad fragmentada</td>
+          </tr>
+          <tr>
+            <td>Ideación suicida</td>
+            <td>Si existe, vinculada a "unirse al fallecido"</td>
+            <td>Puede ser activa o pasiva sin relación directa</td>
+            <td>Puede estar presente como deseo de reunión</td>
+          </tr>
+          <tr>
+            <td>Funcionalidad</td>
+            <td>Recuperación gradual observable</td>
+            <td>Deterioro global sostenido</td>
+            <td>Dificultad específica para retomar roles/identidad</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <ol class="steps" style="margin-top:1.5rem;">
+        <li class="step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <strong>Análisis de signos de alerta</strong>
+            <p>Identifica los elementos del caso que orientan hacia cada diagnóstico. ¿Cuál pesa más? ¿Qué información faltante es crítica para decidir?</p>
+          </div>
+        </li>
+        <li class="step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <strong>Evaluación del riesgo</strong>
+            <p>La ideación de "estar con él" requiere evaluación diferencial. ¿Cómo explorarías esto? ¿Qué escala o protocolo utilizarías? ¿Qué factores protectores observas?</p>
+          </div>
+        </li>
+        <li class="step">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <strong>Decisión diagnóstica razonada</strong>
+            <p>Formula tu diagnóstico diferencial con nivel de certeza. Si no puedes decidir aún, ¿qué plan de evaluación complementaria propondrías y en qué plazo?</p>
+          </div>
+        </li>
+      </ol>
+
+      <button class="eval-btn" onclick="markProgress('diff', 33)">✓ Marcar actividad como completada</button>
+    </div>
+
+    <div class="sub-panel" id="diff-actividad2">
+      <h3 style="font-family:'Playfair Display',serif; margin-bottom:1rem;">Actividad 2 · Espectro Ansioso-Depresivo: Toma de decisión clínica</h3>
+
+      <p style="font-size:0.9rem; color:var(--slate); margin-bottom:1.5rem; font-weight:300; line-height:1.6;">Trabaja el razonamiento diferencial para los cuadros más frecuentes en comorbilidad ansiosa-depresiva. Marca cada criterio que revisarías para discriminar.</p>
+
+      <ul class="checklist">
+        <li class="check-item" onclick="toggleCheck(this)">
+          <div class="check-box"></div>
+          <div class="check-text">Preguntar por el orden de aparición: ¿qué vino primero, la ansiedad o la depresión?</div>
+        </li>
+        <li class="check-item" onclick="toggleCheck(this)">
+          <div class="check-box"></div>
+          <div class="check-text">Evaluar si la ansiedad existe independientemente de los episodios depresivos</div>
+        </li>
+        <li class="check-item" onclick="toggleCheck(this)">
+          <div class="check-box"></div>
+          <div class="check-text">Distinguir rumiación depresiva (pasado, culpa) de preocupación ansiosa (futuro, amenaza)</div>
+        </li>
+        <li class="check-item" onclick="toggleCheck(this)">
+          <div class="check-box"></div>
+          <div class="check-text">Valorar si la evitación conductual es secundaria al estado de ánimo o primaria al miedo</div>
+        </li>
+        <li class="check-item" onclick="toggleCheck(this)">
+          <div class="check-box"></div>
+          <div class="check-text">Explorar historia familiar de trastornos del estado de ánimo y de ansiedad por separado</div>
+        </li>
+        <li class="check-item" onclick="toggleCheck(this)">
+          <div class="check-box"></div>
+          <div class="check-text">Aplicar escala PHQ-9 y GAD-7 por separado y comparar perfiles</div>
+        </li>
+        <li class="check-item" onclick="toggleCheck(this)">
+          <div class="check-box"></div>
+          <div class="check-text">Preguntar por periodos libres de síntomas y sus características</div>
+        </li>
+        <li class="check-item" onclick="toggleCheck(this)">
+          <div class="check-box"></div>
+          <div class="check-text">Considerar si se trata de trastorno mixto ansioso-depresivo (6A73 en CIE-11)</div>
+        </li>
+      </ul>
+
+      <button class="eval-btn" style="margin-top:1.5rem;" onclick="markProgress('diff', 66)">✓ Marcar actividad como completada</button>
+    </div>
+
+    <div class="sub-panel" id="diff-actividad3">
+      <h3 style="font-family:'Playfair Display',serif; margin-bottom:1rem;">Actividad 3 · Árbol Diagnóstico: Psicosis vs Trauma vs Disociación</h3>
+
+      <div class="callout">
+        <div class="callout-icon">⚠️</div>
+        <p>Este es uno de los diagnósticos diferenciales de mayor complejidad y consecuencias clínicas. Un error puede llevar a tratamientos radicalmente distintos (antipsicóticos vs psicoterapia trauma-focada). La sistemática es esencial.</p>
+      </div>
+
+      <ol class="steps">
+        <li class="step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <strong>Primer nodo: ¿Hay ruptura con la realidad?</strong>
+            <p>Distingue entre: (a) delirio genuino — convicción irrefutable no culturalmente normada; (b) creencias sobrevaluadas; (c) flashbacks traumáticos — el paciente sabe que es pasado aunque lo "reviva"; (d) estados disociativos — confusión de identidad sin pérdida de realidad externa.</p>
+          </div>
+        </li>
+        <li class="step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <strong>Segundo nodo: ¿Cuál es el contexto de aparición?</strong>
+            <p>La psicosis de inicio agudo suele aparecer sin trauma previo identificable. Los síntomas pseudopsicóticos en TEPT aparecen vinculados a desencadenantes, son más breves y el paciente generalmente mantiene insight parcial.</p>
+          </div>
+        </li>
+        <li class="step">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <strong>Tercer nodo: Evaluar disociación con escala estructurada</strong>
+            <p>Aplica DES-II (Dissociative Experiences Scale) o MID. Una puntuación elevada en un paciente "psicótico" debe alertar de TID u otro trastorno disociativo. Distingue despersonalización de síntomas negativos esquizofrénicos.</p>
+          </div>
+        </li>
+        <li class="step">
+          <div class="step-num">4</div>
+          <div class="step-content">
+            <strong>Cuarto nodo: Historia longitudinal</strong>
+            <p>La esquizofrenia tiene curso crónico con deterioro progresivo. El TEPT-C puede tener oscilaciones. Los trastornos disociativos complejos tienen historia de trauma severo y temprano. Construye una línea temporal con el paciente.</p>
+          </div>
+        </li>
+        <li class="step">
+          <div class="step-num">5</div>
+          <div class="step-content">
+            <strong>Quinto nodo: Derivación y trabajo en equipo</strong>
+            <p>En casos de alta complejidad, reflexiona sobre cuándo es necesaria supervisión especializada, evaluación neuropsicológica o consulta psiquiátrica. ¿Cuáles son los indicadores de urgencia?</p>
+          </div>
+        </li>
+      </ol>
+
+      <button class="eval-btn" onclick="markProgress('diff', 100)">✓ Marcar actividad como completada</button>
+    </div>
+  </section>
+
+  <!-- INTEGRADO -->
+  <section class="section" id="integrado">
+    <div class="section-header">
+      <div class="section-number">04</div>
+      <div class="section-title-block">
+        <h2>Diagnóstico Integrado</h2>
+        <p>Síntesis de los tres niveles en la práctica clínica real</p>
+      </div>
+    </div>
+
+    <div class="case-box">
+      <div class="case-box-label">Caso Complejo — "S.B.", 41 años</div>
+      <p>S.B. llega derivada por su médico de atención primaria por "ansiedad y problemas relacionales". En la entrevista describe episodios de "explosiones de rabia" que luego la dejan exhausta y avergonzada. Refiere relaciones intensas e inestables; actualmente en proceso de separación. Ha realizado tres intentos de autolesión sin intención suicida declarada "para calmarme". Historia de maltrato emocional crónico en la infancia. No duerme más de 4-5 horas, pero no lo considera problema. Tiene períodos de "energía increíble" que duran días, durante los que gasta compulsivamente. La paciente dice: "Todo el mundo me dice que soy bipolar, pero yo creo que simplemente tengo mucho carácter."</p>
+    </div>
+
+    <ol class="steps">
+      <li class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <strong>Nivel Categorial — Diagnóstico diferencial inicial</strong>
+          <p>¿Qué categorías diagnósticas hay que considerar? Lista al menos 4. ¿Cuál es el diagnóstico principal provisional y cuáles son secundarios o diferenciales? Argumenta con criterios específicos para cada categoría.</p>
+        </div>
+      </li>
+      <li class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <strong>Nivel Funcional — Análisis de las autolesiones</strong>
+          <p>Aplica el modelo ABC específicamente a las conductas de autolesión. ¿Cuál es su función (regulación emocional, comunicación, autopunición)? ¿Cómo difiere esto del diagnóstico categorial?</p>
+        </div>
+      </li>
+      <li class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <strong>Nivel Diferencial — TLP vs Bipolar II vs TEPT-C</strong>
+          <p>Este es el diferencial más frecuente y más debatido. Usa la tabla de la Actividad 1 de Diferencial como modelo. ¿Qué datos del caso apuntan a cada diagnóstico? ¿Hay solapamiento real (comorbilidad) o es todo una misma condición?</p>
+        </div>
+      </li>
+      <li class="step">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <strong>Formulación integradora</strong>
+          <p>Redacta una formulación clínica de 200-300 palabras que integre: diagnóstico categorial con especificadores + hipótesis funcional + razonamiento diferencial + factores predisponentes/perpetuantes/protectores.</p>
+        </div>
+      </li>
+      <li class="step">
+        <div class="step-num">5</div>
+        <div class="step-content">
+          <strong>Plan de evaluación complementaria</strong>
+          <p>¿Qué instrumentos de evaluación estandarizada aplicarías? ¿En qué orden y por qué? Considera: entrevistas estructuradas (SCID-5, IPDE), escalas de síntomas, tests proyectivos o neuropsicológicos si fueran indicados.</p>
+        </div>
+      </li>
+    </ol>
+
+    <button class="eval-btn" onclick="markProgress('int', 100)">✓ Marcar caso integrado como completado</button>
+  </section>
+
+  <!-- FLASHCARDS -->
+  <section class="section" id="flashcards">
+    <div class="section-header">
+      <div class="section-number">05</div>
+      <div class="section-title-block">
+        <h2>Tarjetas de Revisión</h2>
+        <p>Conceptos esenciales para consolidar el aprendizaje</p>
+      </div>
+    </div>
+
+    <div class="flashcard-area">
+      <div class="flashcard" id="flashcard" onclick="revealCard()">
+        <div class="flashcard-front-label" id="fc-label">Haz clic para revelar la respuesta</div>
+        <div class="flashcard-q" id="fc-question">Cargando...</div>
+        <div class="flashcard-a" id="fc-answer">Cargando...</div>
+      </div>
+    </div>
+
+    <div class="fc-controls">
+      <button class="fc-btn reveal" onclick="revealCard()">Revelar</button>
+      <button class="fc-btn" onclick="nextCard(-1)">← Anterior</button>
+      <button class="fc-btn" onclick="nextCard(1)">Siguiente →</button>
+    </div>
+    <div class="fc-counter" id="fc-counter">1 / 10</div>
+  </section>
+
+</main>
+
+<script>
+// ──────────────────────────────────────────────
+// NAVIGATION
+// ──────────────────────────────────────────────
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  const tabs = document.querySelectorAll('.nav-tab');
+  const map = { overview:0, categorial:1, funcional:2, diferencial:3, integrado:4, flashcards:5 };
+  if (map[id] !== undefined) tabs[map[id]].classList.add('active');
+}
+
+function showSubPanel(prefix, panelId) {
+  const section = document.getElementById(prefix === 'cat' ? 'categorial' : prefix === 'func' ? 'funcional' : 'diferencial');
+  section.querySelectorAll('.sub-panel').forEach(p => p.classList.remove('active'));
+  section.querySelectorAll('.sub-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(prefix + '-' + panelId).classList.add('active');
+  const tabs = section.querySelectorAll('.sub-tab');
+  const panelMap = {
+    cat: { teoria:0, actividad1:1, actividad2:2, actividad3:3 },
+    func: { teoria:0, actividad1:1, actividad2:2 },
+    diff: { actividad1:0, actividad2:1, actividad3:2 }
+  };
+  if (panelMap[prefix] && panelMap[prefix][panelId] !== undefined) {
+    tabs[panelMap[prefix][panelId]].classList.add('active');
+  }
+}
+
+// ──────────────────────────────────────────────
+// PROGRESS
+// ──────────────────────────────────────────────
+function markProgress(module, pct) {
+  const bar = document.getElementById('prog-' + module);
+  const label = document.getElementById('pct-' + module);
+  if (bar && label) {
+    bar.style.width = pct + '%';
+    label.textContent = pct + '%';
+  }
+}
+
+// ──────────────────────────────────────────────
+// TIMER
+// ──────────────────────────────────────────────
+const timers = {};
+
+function startTimer(id, minutes) {
+  if (timers[id]) { clearInterval(timers[id].interval); }
+  let secs = timers[id]?.remaining || minutes * 60;
+  const el = document.getElementById('timer-' + id);
+  timers[id] = {
+    interval: setInterval(() => {
+      secs--;
+      timers[id].remaining = secs;
+      if (secs <= 0) {
+        clearInterval(timers[id].interval);
+        el.textContent = '00:00';
+        el.style.color = 'var(--rust)';
+        return;
+      }
+      const m = String(Math.floor(secs / 60)).padStart(2,'0');
+      const s = String(secs % 60).padStart(2,'0');
+      el.textContent = m + ':' + s;
+    }, 1000)
+  };
+}
+
+function resetTimer(id, minutes) {
+  if (timers[id]) { clearInterval(timers[id].interval); delete timers[id]; }
+  const el = document.getElementById('timer-' + id);
+  if (el) {
+    el.textContent = String(minutes).padStart(2,'0') + ':00';
+    el.style.color = 'var(--ink)';
+  }
+}
+
+// ──────────────────────────────────────────────
+// CHECKLIST
+// ──────────────────────────────────────────────
+function toggleCheck(el) {
+  el.classList.toggle('checked');
+  el.querySelector('.check-box').textContent = el.classList.contains('checked') ? '✓' : '';
+}
+
+// ──────────────────────────────────────────────
+// FLASHCARDS
+// ──────────────────────────────────────────────
+const cards = [
+  {
+    q: "¿Cuál es la diferencia entre confiabilidad y validez en el diagnóstico psicológico?",
+    a: "La confiabilidad (o fiabilidad) se refiere a la consistencia del diagnóstico: dos clínicos deben llegar al mismo diagnóstico con el mismo paciente. La validez implica que el diagnóstico realmente mide lo que dice medir y predice el curso clínico y la respuesta al tratamiento. Los sistemas categoriales actuales priorizan la confiabilidad, con validez aún en debate."
+  },
+  {
+    q: "¿Qué es el reforzamiento negativo y cómo aparece frecuentemente en los trastornos de ansiedad?",
+    a: "El reforzamiento negativo es el incremento de una conducta por la eliminación de un estímulo aversivo. En los trastornos de ansiedad, la evitación (conducta) elimina la ansiedad a corto plazo (estímulo aversivo), lo que refuerza la evitación. Esto explica por qué los rituales compulsivos, la evitación fóbica y las conductas de seguridad se mantienen y escalán con el tiempo."
+  },
+  {
+    q: "¿Qué caracteriza al diagnóstico diferencial entre Trastorno Límite de Personalidad y Trastorno Bipolar tipo II?",
+    a: "Ambos comparten labilidad afectiva, impulsividad e inestabilidad. Diferencias clave: en TLP los cambios de humor son reactivos a eventos interpersonales y duran horas; en el TB-II las fases hipomaníacas duran al menos 4 días sin factor desencadenante claro. El TLP presenta inestabilidad de identidad y relaciones, y responde a psicoterapia (DBT); el TB-II típicamente requiere estabilizadores del ánimo."
+  },
+  {
+    q: "¿Qué es el análisis funcional y en qué se diferencia del diagnóstico categorial?",
+    a: "El análisis funcional identifica las variables que controlan y mantienen una conducta problema (antecedentes, conducta, consecuencias). Es idiográfico: describe el caso único. El diagnóstico categorial es nomotético: clasifica al paciente en una categoría compartida. El análisis funcional permite diseñar intervenciones personalizadas; el categorial facilita la comunicación y la investigación, pero no necesariamente informa el tratamiento."
+  },
+  {
+    q: "¿Cuál es el concepto de 'comorbilidad' y cuáles son sus interpretaciones en psicología clínica?",
+    a: "La comorbilidad es la presencia simultánea de dos o más diagnósticos en un mismo paciente. Puede interpretarse como: (1) condiciones genuinamente independientes que coocurren; (2) un artefacto del sistema categorial (mismos síntomas clasificados en dos cajones distintos); (3) una condición siendo factor de riesgo de la otra; o (4) un diagnóstico siendo una manifestación de un proceso subyacente común. La alta comorbilidad en los sistemas actuales cuestiona la validez del modelo categorial."
+  },
+  {
+    q: "¿Cómo se aplica el modelo de las 4P en la formulación de caso clínico?",
+    a: "Las 4P organizan los factores etiológicos en: Predisponentes (vulnerabilidades previas: genética, temperamento, trauma temprano), Precipitantes (desencadenantes del episodio actual), Perpetuantes (mecanismos que mantienen el problema: evitación, cogniciones disfuncionales, respuestas del entorno) y Protectores (recursos y factores de resiliencia). Permite un mapa explicativo del caso que integra la dimensión longitudinal y orienta el tratamiento."
+  },
+  {
+    q: "¿Qué criterios del DSM-5-TR ayudan a distinguir el duelo normal de un Episodio Depresivo Mayor?",
+    a: "El DSM-5-TR eliminó la exclusión por duelo en el EDM. Sin embargo, orienta al clínico a considerar: en el duelo el dolor está centrado en la pérdida, persiste la capacidad de sentir emociones positivas, la autoestima está preservada y la ideación de muerte se refiere a 'unirse al fallecido'. En el EDM hay disforia generalizada, anhedonia pervasiva, sentimientos de inutilidad y culpa desproporcionados, y el deterioro funcional es más global y no remite."
+  },
+  {
+    q: "¿Qué son los 'especificadores' en el DSM-5-TR y para qué sirven clínicamente?",
+    a: "Los especificadores son modificadores que agregan información descriptiva al diagnóstico principal. Indican: curso (primer episodio, recurrente, en remisión parcial/total), severidad (leve, moderada, grave), características atípicas, con rasgos psicóticos, con inicio periparto, etc. Mejoran la precisión comunicativa, guían decisiones de tratamiento (ej. 'con características melancólicas' orienta hacia medicación) y tienen valor pronóstico."
+  },
+  {
+    q: "¿Cuál es la diferencia entre un flashback y una alucinación en el contexto del diagnóstico diferencial trauma-psicosis?",
+    a: "Un flashback es una reexperimentación vivida de un evento traumático pasado; el paciente generalmente mantiene conciencia de que es un recuerdo, aunque se sienta 'presente'. La alucinación es una percepción sin objeto en el presente sin insight de que es irreal. Claves diagnósticas: el flashback tiene contenido narrativo relacionado con el trauma, hay factor desencadenante identificable y el paciente puede recuperar orientación. El mantenimiento del insight (aunque parcial) es el discriminador clave."
+  },
+  {
+    q: "¿Qué papel tiene el contexto cultural en el diagnóstico psicológico y cómo debe abordarse éticamente?",
+    a: "El contexto cultural determina qué conductas son consideradas patológicas, la expresión de los síntomas (síndromes culturales), la narrativa del sufrimiento y los sistemas de ayuda preferidos. Éticamente, el clínico debe: (1) explorar el significado cultural de los síntomas antes de patologizar; (2) distinguir síndromes culturales específicos de diagnósticos DSM; (3) evitar el sesgo etnocéntrico; (4) incluir al paciente como experto de su propia cultura. El DSM-5 incorpora la Entrevista de Formulación Cultural (CFI) para este fin."
+  }
+];
+
+let currentCard = 0;
+let revealed = false;
+
+function updateCard() {
+  const card = document.getElementById('flashcard');
+  card.classList.remove('revealed');
+  document.getElementById('fc-question').textContent = cards[currentCard].q;
+  document.getElementById('fc-answer').textContent = cards[currentCard].a;
+  document.getElementById('fc-counter').textContent = (currentCard + 1) + ' / ' + cards.length;
+  document.getElementById('fc-label').textContent = 'Haz clic para revelar la respuesta';
+  revealed = false;
+}
+
+function revealCard() {
+  const card = document.getElementById('flashcard');
+  if (!revealed) {
+    card.classList.add('revealed');
+    document.getElementById('fc-label').textContent = 'Respuesta ↓';
+    revealed = true;
+  }
+}
+
+function nextCard(dir) {
+  currentCard = (currentCard + dir + cards.length) % cards.length;
+  updateCard();
+}
+
+updateCard();
+</script>
+
+<footer style="
+  background: var(--ink);
+  color: var(--parchment);
+  text-align: center;
+  padding: 1.5rem 2rem;
+  border-top: 3px solid var(--gold);
+  margin-top: 2rem;
+">
+  <p style="
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 0.82rem;
+    font-weight: 300;
+    font-style: italic;
+    opacity: 0.75;
+    letter-spacing: 0.03em;
+    line-height: 1.6;
+  ">Diseño curricular, didáctica y funciones por <span style="font-weight:600; font-style:normal; color:var(--accent);">Psic. Josafat Acosta García</span></p>
+</footer>
+
 </body>
 </html>
